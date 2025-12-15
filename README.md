@@ -2,6 +2,8 @@
 
 A minimalist, image-centric theme for photographers and artists. Originally a Gatsby theme, now fully ported to **Astro** for superior performance and modern development experience.
 
+> **Note**: This theme is a modern Astro port of the beautiful [Clay Theme](https://github.com/lilxyzz/clay-theme) by `lilxyzz`.
+
 ## Features
 
 -   **Astro-Powered**: Blazing fast static site generation with zero-JS output by default.
