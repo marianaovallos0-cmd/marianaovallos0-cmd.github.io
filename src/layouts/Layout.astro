@@ -259,6 +259,7 @@ const { title, description } = Astro.props;
         margin: 0;
         font-size: 4.2rem;
         color: var(--color-base);
+        font-weight: 400;
     }
 
     @media (max-width: 500px) {
@@ -479,6 +480,15 @@ const { title, description } = Astro.props;
         .social-links {
             flex-direction: column;
             align-items: flex-start;
+        }
+
+        .site-head-logo {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.2em;
+            white-space: normal;
         }
 
         .site-head-open {
