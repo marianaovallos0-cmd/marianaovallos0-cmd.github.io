@@ -5,18 +5,21 @@
 /* @import url('../../../static/font/OldLondon.woff'); */
 
 :root {
-    --color-primary: #6d8bff;
-    --color-base: #1a1a1a;
-    --color-border: #e5e7eb;
-    --color-bg: #f8fafc;
+  /* Light mode – verde elegante */
+  --color-primary: #5f8f7a;      /* verde suave elegante */
+  --color-base: #1f2933;         /* texto principal */
+  --color-border: #d6e2dc;       /* bordes suaves */
+  --color-bg: #f7faf9;           /* fondo general */
 
-    --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
-    --font-serif: 'EB Garamond', Georgia, serif;
+  --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
+  --font-serif: 'EB Garamond', Georgia, serif;
 }
 
 [data-theme='dark'] {
-    --color-primary: #8fa8ff;
-    --color-base: #f3f4f6;
-    --color-border: #2a2f36;
-    --color-bg: #0f1216;
+  /* Dark mode – elegante con dorado */
+  --color-primary: #c9b458;      /* dorado suave */
+  --color-base: #e5e7eb;         /* texto claro */
+  --color-border: #2c2f36;       /* bordes oscuros */
+  --color-bg: #0f1115;           /* fondo oscuro profundo */
 }
+

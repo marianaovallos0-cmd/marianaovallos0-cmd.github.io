@@ -427,6 +427,7 @@ production stylesheet in assets/built/screen.css using gulp dev
 }
 
 
+
 .about-card h2 {
   font-size: 3.4rem;
   margin-bottom: 2.2rem;
@@ -463,9 +464,8 @@ production stylesheet in assets/built/screen.css using gulp dev
   border: 1px solid var(--color-border);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
   transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
 }
+
 
 
 .work-card:hover {
@@ -529,7 +529,6 @@ production stylesheet in assets/built/screen.css using gulp dev
 }
 
 .evidence-card {
-  position: relative;
   background: var(--color-bg);
   border-radius: 26px;
   padding: 3.5rem 2.5rem;
@@ -537,8 +536,8 @@ production stylesheet in assets/built/screen.css using gulp dev
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
   text-align: center;
   transition: all 0.35s ease;
-  overflow: hidden;
 }
+
 
 
 .evidence-card::before {
@@ -585,17 +584,18 @@ production stylesheet in assets/built/screen.css using gulp dev
   line-height: 1.6;
 }
 
-/* Dark mode text adjustments */
+/* Dark mode gold accents */
 
 [data-theme='dark'] .about-card,
 [data-theme='dark'] .work-card,
 [data-theme='dark'] .evidence-card {
-  background: #161a20;
+  border: 1px solid rgba(201,180,88,0.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 
 [data-theme='dark'] .work-tag {
-  background: rgba(143,168,255,0.15);
-  color: #a5b4fc;
+  background: rgba(201,180,88,0.15);
+  color: #e6d48a;
 }
 
 
