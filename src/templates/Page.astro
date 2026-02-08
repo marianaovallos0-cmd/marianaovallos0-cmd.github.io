@@ -10,10 +10,6 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const { title, description, thumbnail } = entry.data;
-
-// Image handling: thumbnail is string path to /public/img/...
-// In Astro, if it is in public, just use the path.
-// If imported, use Image component. Legacy used string paths in frontmatter.
 ---
 
 <Layout title={entry.data.title}>
@@ -71,9 +67,46 @@ const { title, description, thumbnail } = entry.data;
             </div>
           </section>
         )}
+
+        {entry.slug === "work" && (
+          <section class="work-section">
+            <div class="work-grid">
+
+              <div class="work-card">
+                <h3 class="work-title">Database Project</h3>
+                <p class="work-desc">
+                  Design and implementation of relational database systems
+                  using SQL and PL/SQL.
+                </p>
+                <span class="work-tag">SQL</span>
+                <span class="work-tag">PL/SQL</span>
+              </div>
+
+              <div class="work-card">
+                <h3 class="work-title">Cybersecurity Lab</h3>
+                <p class="work-desc">
+                  Practical security exercises including vulnerability
+                  analysis and basic penetration testing.
+                </p>
+                <span class="work-tag">Security</span>
+                <span class="work-tag">Networking</span>
+              </div>
+
+              <div class="work-card">
+                <h3 class="work-title">Embedded System</h3>
+                <p class="work-desc">
+                  Microcontroller-based project integrating sensors,
+                  control logic, and real-time communication.
+                </p>
+                <span class="work-tag">STM32</span>
+                <span class="work-tag">C</span>
+              </div>
+
+            </div>
+          </section>
+        )}
+
       </div>
     </article>
   )}
 </Layout>
-
-
