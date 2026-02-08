@@ -17,19 +17,24 @@ const description = indexPage?.data.description || '';
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-text">
-      <h1>Your Name</h1>
-      <p class="subtitle">
-        Portfolio placeholder — content will be added later.
-      </p>
-    </div>
+  <div class="hero-text">
+    <p class="intro">Hello, I’m</p>
 
-    <div class="hero-photo">
-      <div class="photo-circle">
-        Photo
-      </div>
+    <h1>Mariana Ovallos</h1>
+
+    <p class="subtitle">
+      Electronic engineering student focused on cybersecurity,
+      databases, and practical technology projects.
+    </p>
+  </div>
+
+  <div class="hero-photo">
+    <div class="photo-circle">
+      Photo
     </div>
-  </section>
+  </div>
+</section>
+
 
   <section class="presentation">
   <div class="presentation-box">
@@ -80,12 +85,25 @@ const description = indexPage?.data.description || '';
 }
 
 
+.intro {
+  font-size: 1.6rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
 .hero-text h1 {
   color: white;
+  font-size: 5.2rem;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
 }
 
 .subtitle {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.9);
+  font-size: 1.9rem;
+  max-width: 420px;
+  line-height: 1.5;
 }
 
 
