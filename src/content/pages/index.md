@@ -1,6 +1,6 @@
 ---
 templateKey: index-page
-title: Portfolio
+title: 
 description: Personal portfolio
 heading: ""
 subheading: ""

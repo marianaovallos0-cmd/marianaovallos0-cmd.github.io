@@ -6,18 +6,17 @@
 
 
 :root {
-    /* Colores Nuevos - Estilo Profesional */
-    --color-primary: #0056b3;    /* Azul Ingeniería */
-    --color-base: #1a1a1a;       /* Texto casi negro */
-    --color-border: #d1d5db;     /* Gris suave */
-    --color-bg: #fdfbf7;         /* Fondo tipo papel/crema muy suave */
+    /* Colores – Soft / Smart / Modern */
+    --color-primary: #8fa99b;   /* Sage green */
+    --color-base: #1f2933;      /* Texto oscuro suave */
+    --color-border: #e2e6e3;    /* Gris cálido */
+    --color-bg: #fdfefe;        /* Blanco suave */
 
-    /* Fuentes */
+    /* Fuentes (se quedan) */
     --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
     --font-serif: 'EB Garamond', Georgia, serif;
-    
-    /* ... el resto se queda igual ... */
 }
+
 
 [data-theme='dark'] {
     --color-primary: #3498db;
