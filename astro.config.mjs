@@ -4,6 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://clay-astro-theme.netlify.app',
+    site: 'https://marianaovallos0-cmd.github.io',
     integrations: [sitemap()],
 });
