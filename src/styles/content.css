@@ -342,53 +342,73 @@ production stylesheet in assets/built/screen.css using gulp dev
   align-items: center;
 }
 
-.contact-box {
-  max-width: 600px;
-  margin: 4rem auto;
-  padding: 3rem 3.5rem;
-  background: #ffffff;
-  border-radius: 28px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
-  animation: slideUp 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
+/* Contact section – elegant dark style */
 
-.contact-box li {
-  margin: 1.2rem 0;
-  font-size: 1.8rem;
-}
-
-.about-box {
-  max-width: 720px;
-  margin: 4rem auto;
-  padding: 3.5rem 4rem;
+.contact-section {
+  max-width: 1100px;
+  margin: 8rem auto;
+  padding: 5rem 3rem;
+  border-radius: 30px;
   background: linear-gradient(
     135deg,
-    var(--color-primary),
-    var(--color-accent)
+    #111314,
+    #1a1f24
   );
-  color: white;
-  border-radius: 36px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
-  animation: slideUp 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
-  font-size: 1.9rem;
-  line-height: 1.7;
+  color: #f3f4f6;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: 3rem;
+  letter-spacing: 3px;
+  margin-bottom: 3rem;
+  color: #c9b458; /* dorado suave */
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.contact-card {
+  padding: 2.5rem 2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(201,180,88,0.3);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  border-color: #c9b458;
+  transform: translateY(-4px);
+}
+
+.contact-label {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #c9b458;
+  margin-bottom: 0.6rem;
+}
+
+.contact-value {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.contact-note {
+  margin-top: 2rem;
+  padding: 1.6rem;
+  border: 1px solid rgba(201,180,88,0.3);
+  border-radius: 12px;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
 }
 
 
-.work-card {
-  background: #ffffff;
-  border-radius: 28px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-  padding: 2.5rem;
-  transition: all 0.4s ease;
-}
-
-.work-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 55px rgba(0,0,0,0.09);
-}
 
 /* About section – elegant redesign */
 
@@ -419,6 +439,148 @@ production stylesheet in assets/built/screen.css using gulp dev
   color: #4b5563;
   margin-bottom: 1.8rem;
   max-width: 680px;
+}
+
+/* Work section – elegant project cards */
+
+.work-section {
+  max-width: 1100px;
+  margin: 8rem auto;
+  padding: 0 2rem;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3rem;
+}
+
+.work-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2.8rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.work-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-primary);
+}
+
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(109, 139, 255, 0.08),
+    rgba(201, 180, 88, 0.08)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.work-card:hover::after {
+  opacity: 1;
+}
+
+.work-title {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--color-base);
+  font-weight: 600;
+}
+
+.work-desc {
+  font-size: 1.6rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
+}
+
+.work-tag {
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: rgba(109, 139, 255, 0.1);
+  color: #4f46e5;
+  margin-right: 0.5rem;
+}
+
+/* Evidencias section – academic showcase */
+
+.evidence-section {
+  max-width: 1100px;
+  margin: 8rem auto;
+  padding: 0 2rem;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 3rem;
+}
+
+.evidence-card {
+  position: relative;
+  background: white;
+  border-radius: 26px;
+  padding: 3.5rem 2.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+.evidence-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(109, 139, 255, 0.08),
+    rgba(201, 180, 88, 0.08)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.evidence-card:hover::before {
+  opacity: 1;
+}
+
+.evidence-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-primary);
+}
+
+.evidence-icon {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.evidence-title {
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: var(--color-base);
+  margin-bottom: 1rem;
+}
+
+.evidence-desc {
+  font-size: 1.5rem;
+  color: #6b7280;
+  line-height: 1.6;
 }
 
 
