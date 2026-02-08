@@ -16,29 +16,15 @@ const { title, description, thumbnail } = entry.data;
 // If imported, use Image component. Legacy used string paths in frontmatter.
 ---
 
-<Layout title={title} description={description}>
-  <article class={`post-content ${thumbnail ? '' : 'no-image'}`}>
-    {/* Title and description hidden
-    <header class="post-content-header">
-      <h1 class="post-content-title">{title}</h1>
-    </header>
-
-    {description && (
-      <p class="post-content-excerpt">{description}</p>
-    )}
-    */}
-
-    {thumbnail && (
-      <div class="post-content-image">
-        <img src={thumbnail} class="kg-image" alt={title} />
-      </div>
-    )}
-
-    <div class="post-content-body">
-      <Content />
+<Layout title={entry.data.title}>
+  <section class="about-section">
+    <div class="about-card">
+      <article class="post-content">
+        <div class="post-content-body">
+          <Content />
+        </div>
+      </article>
     </div>
-
-    <footer class="post-content-footer">
-    </footer>
-  </article>
+  </section>
 </Layout>
+

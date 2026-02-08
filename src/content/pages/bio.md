@@ -1,16 +1,14 @@
 ---
+templateKey: page
 title: About
-description: About me
-heading: About Me
-subheading: Who I am
 ---
 
-<div class="about-box">
+## About Me
 
-Hi, my name is Mariana.  
-I am an system engineering student interested in technology, cybersecurity, and databases.
+Hi, my name is Mariana.
 
-I enjoy learning new things, working on practical projects, and improving my skills step by step.  
-This portfolio is a space where I will document my growth, my projects, and the knowledge I gain during my career.
+I am a systems engineering student interested in cybersecurity, databases, and practical technology projects.
 
-</div>
+I enjoy learning new things, working on real-world solutions, and improving my technical skills step by step.
+
+My goal is to build secure, efficient, and meaningful systems that solve real problems.
