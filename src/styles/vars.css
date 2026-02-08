@@ -6,10 +6,10 @@
 
 :root {
   /* Light mode – verde elegante */
-  --color-primary: #5f8f7a;      /* verde suave elegante */
-  --color-base: #1f2933;         /* texto principal */
-  --color-border: #d6e2dc;       /* bordes suaves */
-  --color-bg: #f7faf9;           /* fondo general */
+  --color-primary: #5f8f7a;
+  --color-base: #1f2933;
+  --color-border: #d6e2dc;
+  --color-bg: #f7faf9;
 
   --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
   --font-serif: 'EB Garamond', Georgia, serif;
@@ -17,9 +17,10 @@
 
 [data-theme='dark'] {
   /* Dark mode – elegante con dorado */
-  --color-primary: #c9b458;      /* dorado suave */
-  --color-base: #e5e7eb;         /* texto claro */
-  --color-border: #2c2f36;       /* bordes oscuros */
-  --color-bg: #0f1115;           /* fondo oscuro profundo */
+  --color-primary: #c9b458;
+  --color-base: #e5e7eb;
+  --color-border: #2c2f36;
+  --color-bg: #0f1115;
 }
+
 

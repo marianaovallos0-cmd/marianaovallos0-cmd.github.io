@@ -17,7 +17,7 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content={description || "Clay Theme"} />
@@ -25,25 +25,20 @@ const { title, description } = Astro.props;
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title || "Clay"}</title>
+
         <ClientRouter />
+
+        <!-- Theme initialization BEFORE page renders -->
         <script is:inline>
-            // Theme init
-            const theme = (() => {
-                if (
-                    typeof localStorage !== "undefined" &&
-                    localStorage.getItem("theme")
-                ) {
-                    return localStorage.getItem("theme");
-                }
-                return "light";
-            })();
-            if (theme === "dark") {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
                 document.documentElement.setAttribute("data-theme", "dark");
             } else {
-                document.documentElement.removeAttribute("data-theme");
+                document.documentElement.setAttribute("data-theme", "light");
             }
         </script>
     </head>
+
     <body class="site-wrapper">
         <Header title={title} />
 
@@ -56,8 +51,6 @@ const { title, description } = Astro.props;
         <Footer />
 
         <script>
-            import { navigate } from "astro:transitions/client";
-
             function initNav() {
                 const burger = document.querySelector(".nav-burger");
                 const wrapper = document.querySelector(".site-wrapper");
@@ -71,18 +64,15 @@ const { title, description } = Astro.props;
 
             function initTheme() {
                 const toggleBtn = document.getElementById("theme-toggle");
+
                 const updateIcon = () => {
                     const isDark =
                         document.documentElement.getAttribute("data-theme") ===
                         "dark";
-                    // Add logic to animate or swap icons if needed, currently CSS handles visibility? No, added SVGs.
-                    // Simple SVG toggle:
-                    const sun = document.querySelector(
-                        ".sun-icon",
-                    ) as HTMLElement;
-                    const moon = document.querySelector(
-                        ".moon-icon",
-                    ) as HTMLElement;
+
+                    const sun = document.querySelector(".sun-icon");
+                    const moon = document.querySelector(".moon-icon");
+
                     if (sun && moon) {
                         sun.style.display = isDark ? "inline-block" : "none";
                         moon.style.display = isDark ? "none" : "inline-block";
@@ -93,48 +83,30 @@ const { title, description } = Astro.props;
 
                 if (toggleBtn) {
                     toggleBtn.addEventListener("click", () => {
-                        const currentTheme =
+                        const current =
                             document.documentElement.getAttribute("data-theme");
-                        const newTheme =
-                            currentTheme === "dark" ? "light" : "dark";
 
-                        if (newTheme === "dark") {
-                            document.documentElement.setAttribute(
-                                "data-theme",
-                                "dark",
-                            );
-                        } else {
-                            document.documentElement.removeAttribute(
-                                "data-theme",
-                            );
-                        }
-                        localStorage.setItem("theme", newTheme);
+                        const next = current === "dark" ? "light" : "dark";
+
+                        document.documentElement.setAttribute(
+                            "data-theme",
+                            next,
+                        );
+                        localStorage.setItem("theme", next);
+
                         updateIcon();
                     });
                 }
             }
 
-            // Run on view transitions (fires on initial load too)
             document.addEventListener("astro:page-load", () => {
                 initNav();
                 initTheme();
             });
 
-            // Re-apply theme on swap to prevent flash?
-            // The is:inline script in head handles the initial check on reload.
-            // astro:after-swap handles verifying state after client-side nav.
             document.addEventListener("astro:after-swap", () => {
-                const theme = localStorage.getItem("theme");
-                if (
-                    theme === "dark" ||
-                    (!theme &&
-                        window.matchMedia("(prefers-color-scheme: dark)")
-                            .matches)
-                ) {
-                    document.documentElement.setAttribute("data-theme", "dark");
-                } else {
-                    document.documentElement.removeAttribute("data-theme");
-                }
+                const theme = localStorage.getItem("theme") || "light";
+                document.documentElement.setAttribute("data-theme", theme);
             });
         </script>
     </body>

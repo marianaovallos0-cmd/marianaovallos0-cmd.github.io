@@ -2,11 +2,11 @@
 body {
     font-family: var(--font-serif);
     background: var(--color-bg);
-    color: var(--color-base); /* Ensure text respects theme */
+    color: var(--color-base);
     transition: background 0.3s ease-out, color 0.3s ease-out;
-    transition-delay: 0.25;
     margin: 0;
 }
+
 
 .theme-toggle {
     background: transparent;
