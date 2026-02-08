@@ -16,11 +16,12 @@
 }
 
 [data-theme='dark'] {
-  /* Dark mode – elegante con dorado */
-  --color-primary: #c9b458;
-  --color-base: #e5e7eb;
-  --color-border: #2c2f36;
-  --color-bg: #0f1115;
+  /* Verde oscuro elegante */
+  --color-primary: #c9b458;   /* dorado suave */
+  --color-base: #f1f5f3;      /* texto claro */
+  --color-border: #3a3f3c;    /* borde oscuro */
+  --color-bg: #0e1613;        /* verde oscuro profundo */
 }
+
 
 
