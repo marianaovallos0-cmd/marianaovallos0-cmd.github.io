@@ -6,15 +6,17 @@
 
 
 :root {
-    --color-primary: #9bb7ad;   /* sage green suave */
-    --color-accent: #cbb9dd;    /* lavender elegante */
-    --color-base: #24333d;      /* texto azul-gris */
-    --color-border: #e6e1ec;    /* borde cálido */
-    --color-bg: #f9f8fc;        /* blanco con tinte lila */
+    /* Paleta principal */
+    --color-primary: #8fb3a3;   /* sage green */
+    --color-accent: #c8b6e2;    /* lavender */
+    --color-base: #1f2a33;      /* texto */
+    --color-border: #e4e0ee;    /* borde suave */
+    --color-bg: #f7f6fb;        /* fondo general */
 
     --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
     --font-serif: 'EB Garamond', Georgia, serif;
 }
+
 
 
 
