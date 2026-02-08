@@ -1,62 +1,107 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PostCard from '../components/PostCard.astro';
-import { getCollection } from 'astro:content';
-
-// Fetch all collections
-const allPages = await getCollection('pages');
-const allNews = await getCollection('news');
-const allWork = await getCollection('work');
-const allSold = await getCollection('sold');
-
-// Combine for filtering
-const allContent = [...allPages, ...allNews, ...allWork, ...allSold];
-
-// Filter for pagetype containing 'main' and sort by number
-const posts = allContent.filter(item => {
-    return item.data.pagetype && item.data.pagetype.includes('main');
-}).sort((a, b) => {
-    const numA = a.data.number || 9999;
-    const numB = b.data.number || 9999;
-    return numA - numB;
-});
-
-// Get index-page metadata (from pages collection)
-const indexPage = allPages.find(p => p.slug === 'index');
-const title = indexPage?.data.title || 'Clay';
-const description = indexPage?.data.description;
-
-let postCounter = 0;
 ---
 
-<Layout title={title} description={description}>
-    <div class="post-feed">
-        {posts.map((post) => {
-            postCounter++;
-            // Calculate slug. If it's from 'pages', slug is just slug (or flattened).
-            // content/pages/bio.md -> slug 'bio'.
-            // content/work/work-1.md -> slug 'work-1'? No, in config.ts, work collection.
-            // But legacy mapped work/work-1.md -> /work/work-1
-            // My [...slug].astro will handle mapping.
-            // Here I need to generate the same link.
+<section class="hero">
+  <div class="hero-text">
+    <h1>Your Name</h1>
+    <p class="subtitle">
+      Portfolio placeholder — content will be added later.
+    </p>
+  </div>
 
-            let slug = post.slug;
-            if (post.collection === 'work') slug = `work/${post.slug}`;
-            if (post.collection === 'news') slug = `news/${post.slug}`;
-            if (post.collection === 'sold') slug = `sold/${post.slug}`;
-            // Pages collection: 'bio' -> 'bio'.
-
-            // Wait, legacy slug split logic:
-            // src/pages/bio/index.md -> /bio.
-            // content/work/work-1.md -> /work/work-1.
-
-            return (
-                <PostCard
-                    count={postCounter}
-                    post={post}
-                    slug={slug}
-                />
-            );
-        })}
+  <div class="hero-photo">
+    <!-- Placeholder seguro -->
+    <div class="photo-circle">
+      <span>Photo</span>
     </div>
-</Layout>
+  </div>
+</section>
+
+<section class="projects-preview">
+  <h2>Portfolio</h2>
+
+  <div class="projects-grid">
+    <div class="project-card"></div>
+    <div class="project-card"></div>
+    <div class="project-card"></div>
+  </div>
+</section>
+
+<style>
+.hero {
+  max-width: 1100px;
+  margin: 6rem auto 4rem;
+  padding: 0 1.5rem;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero-text h1 {
+  font-size: 2.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  max-width: 420px;
+}
+
+.hero-photo {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Projects section */
+.projects-preview {
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.projects-preview h2 {
+  margin-bottom: 2rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  height: 180px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+</style>
