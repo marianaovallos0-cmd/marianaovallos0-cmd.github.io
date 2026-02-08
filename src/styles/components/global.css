@@ -1,20 +1,14 @@
 :root {
-  /* 🎨 Color palette */
-  --color-bg: #fdfefe;              /* white / off-white */
-  --color-surface: #f3f5f4;         /* beige / soft neutral */
-  --color-primary: #8fa99b;         /* sage green */
-  --color-secondary: #8faadc;       /* soft blue */
-  --color-accent: #c7b9d6;          /* soft lavender */
+    /* Colores visibles pero elegantes */
+    --color-primary: #7fa89a;   /* sage green vivo */
+    --color-base: #1f2a33;      /* texto azul oscuro */
+    --color-border: #d9e2dd;    /* borde suave */
+    --color-bg: #f7faf9;        /* fondo NO blanco puro */
 
-  /* ✍️ Text */
-  --color-text-main: #1f2933;
-  --color-text-muted: #6b7280;
-
-  /* UI */
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.06);
+    --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
+    --font-serif: 'EB Garamond', Georgia, serif;
 }
+
 
 /* Base reset */
 * {
