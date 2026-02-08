@@ -419,12 +419,13 @@ production stylesheet in assets/built/screen.css using gulp dev
 }
 
 .about-card {
-  background: white;
+  background: var(--color-bg);
   border-radius: 28px;
   padding: 4.5rem 5rem;
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--color-border);
 }
+
 
 .about-card h2 {
   font-size: 3.4rem;
@@ -433,12 +434,12 @@ production stylesheet in assets/built/screen.css using gulp dev
   font-weight: 600;
 }
 
+
 .about-card p {
   font-size: 1.9rem;
   line-height: 1.75;
-  color: #4b5563;
-  margin-bottom: 1.8rem;
-  max-width: 680px;
+  color: var(--color-base);
+  opacity: 0.75;
 }
 
 /* Work section – elegant project cards */
@@ -456,7 +457,7 @@ production stylesheet in assets/built/screen.css using gulp dev
 }
 
 .work-card {
-  background: white;
+  background: var(--color-bg);
   border-radius: 24px;
   padding: 2.8rem;
   border: 1px solid var(--color-border);
@@ -465,6 +466,7 @@ production stylesheet in assets/built/screen.css using gulp dev
   position: relative;
   overflow: hidden;
 }
+
 
 .work-card:hover {
   transform: translateY(-6px);
@@ -498,9 +500,8 @@ production stylesheet in assets/built/screen.css using gulp dev
 
 .work-desc {
   font-size: 1.6rem;
-  color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 1.6rem;
+  color: var(--color-base);
+  opacity: 0.75;
 }
 
 .work-tag {
@@ -529,7 +530,7 @@ production stylesheet in assets/built/screen.css using gulp dev
 
 .evidence-card {
   position: relative;
-  background: white;
+  background: var(--color-bg);
   border-radius: 26px;
   padding: 3.5rem 2.5rem;
   border: 1px solid var(--color-border);
@@ -538,6 +539,7 @@ production stylesheet in assets/built/screen.css using gulp dev
   transition: all 0.35s ease;
   overflow: hidden;
 }
+
 
 .evidence-card::before {
   content: "";
@@ -576,11 +578,24 @@ production stylesheet in assets/built/screen.css using gulp dev
   color: var(--color-base);
   margin-bottom: 1rem;
 }
-
 .evidence-desc {
   font-size: 1.5rem;
-  color: #6b7280;
+  color: var(--color-base);
+  opacity: 0.75;
   line-height: 1.6;
+}
+
+/* Dark mode text adjustments */
+
+[data-theme='dark'] .about-card,
+[data-theme='dark'] .work-card,
+[data-theme='dark'] .evidence-card {
+  background: #161a20;
+}
+
+[data-theme='dark'] .work-tag {
+  background: rgba(143,168,255,0.15);
+  color: #a5b4fc;
 }
 
 
