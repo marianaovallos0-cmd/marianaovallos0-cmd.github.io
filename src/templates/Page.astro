@@ -17,14 +17,63 @@ const { title, description, thumbnail } = entry.data;
 ---
 
 <Layout title={entry.data.title}>
-  <section class="about-section">
-    <div class="about-card">
-      <article class="post-content">
-        <div class="post-content-body">
-          <Content />
-        </div>
-      </article>
-    </div>
-  </section>
+  {entry.slug === "bio" ? (
+    <section class="about-section">
+      <div class="about-card">
+        <article class="post-content">
+          <div class="post-content-body">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </section>
+  ) : (
+    <article class="post-content">
+      <div class="post-content-body">
+        <Content />
+
+        {entry.slug === "evidencias" && (
+          <section class="evidence-section">
+            <div class="evidence-grid">
+
+              <div class="evidence-card">
+                <div class="evidence-icon">SQL</div>
+                <h3 class="evidence-title">SQL Scripts</h3>
+                <p class="evidence-desc">
+                  Database queries, joins, views, and optimization exercises.
+                </p>
+              </div>
+
+              <div class="evidence-card">
+                <div class="evidence-icon">PL/SQL</div>
+                <h3 class="evidence-title">PL/SQL Programs</h3>
+                <p class="evidence-desc">
+                  Stored procedures, functions, triggers, and database logic.
+                </p>
+              </div>
+
+              <div class="evidence-card">
+                <div class="evidence-icon">NoSQL</div>
+                <h3 class="evidence-title">NoSQL Experiments</h3>
+                <p class="evidence-desc">
+                  Document-based and non-relational database models.
+                </p>
+              </div>
+
+              <div class="evidence-card">
+                <div class="evidence-icon">SYS</div>
+                <h3 class="evidence-title">Final Project</h3>
+                <p class="evidence-desc">
+                  Integrated system with database design and logic.
+                </p>
+              </div>
+
+            </div>
+          </section>
+        )}
+      </div>
+    </article>
+  )}
 </Layout>
+
 

@@ -9,8 +9,8 @@ subheading: Let’s connect
 
 You can reach me through the following channels.
 
-- Email: your@email.com  
+- Email: marianaovallos0@gmail.com  
 - LinkedIn: linkedin.com/in/yourprofile  
-- GitHub: github.com/youruser  
+- GitHub: github.com/marianaovallos0-cmd
 
 </div>
