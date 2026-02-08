@@ -6,16 +6,16 @@
 
 
 :root {
-    /* Colores – Soft / Smart / Modern */
-    --color-primary: #8fa99b;   /* Sage green */
-    --color-base: #1f2933;      /* Texto oscuro suave */
-    --color-border: #e2e6e3;    /* Gris cálido */
-    --color-bg: #fdfefe;        /* Blanco suave */
+    --color-primary: #9bb7ad;   /* sage green suave */
+    --color-accent: #cbb9dd;    /* lavender elegante */
+    --color-base: #24333d;      /* texto azul-gris */
+    --color-border: #e6e1ec;    /* borde cálido */
+    --color-bg: #f9f8fc;        /* blanco con tinte lila */
 
-    /* Fuentes (se quedan) */
     --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
     --font-serif: 'EB Garamond', Georgia, serif;
 }
+
 
 
 [data-theme='dark'] {

@@ -246,6 +246,12 @@ footer.site-foot a {
     padding: 12px 12px 12px 12px;
 }
 
+
+body.home .page-head {
+  display: none;
+}
+
+
 @media (max-width: 850px) {
     .site-head {
         padding: 0;
@@ -366,4 +372,5 @@ footer.site-foot a {
         transition: transform 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
         transform: translateY(-4vw);
     }
+    
 }

@@ -358,6 +358,33 @@ production stylesheet in assets/built/screen.css using gulp dev
   font-size: 1.8rem;
 }
 
+.about-box {
+  max-width: 720px;
+  margin: 4rem auto;
+  padding: 3.5rem 4rem;
+  background: #ffffff;
+  border-radius: 32px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+  animation: slideUp 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+  font-size: 1.9rem;
+  line-height: 1.7;
+}
+
+.work-card {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  padding: 2.5rem;
+  transition: all 0.4s ease;
+}
+
+.work-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 55px rgba(0,0,0,0.09);
+}
+
 
 
 /* Image boarder */
