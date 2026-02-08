@@ -4,18 +4,18 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=League+Spartan:wght@300;400;500;600;700&display=swap');
 /* @import url('../../../static/font/OldLondon.woff'); */
 
-
 :root {
-    /* Paleta principal */
-    --color-primary: #8fb3a3;   /* sage green */
-    --color-accent: #c8b6e2;    /* lavender */
-    --color-base: #1f2a33;      /* texto */
-    --color-border: #e4e0ee;    /* borde suave */
-    --color-bg: #f7f6fb;        /* fondo general */
+    /* Nueva paleta con más contraste */
+    --color-primary: #6f9488;   /* sage más profundo */
+    --color-accent: #a995d6;    /* lavanda elegante */
+    --color-base: #1f2a33;      /* texto principal */
+    --color-border: #e4e0ee;    
+    --color-bg: #f7f6fb;
 
     --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
     --font-serif: 'EB Garamond', Georgia, serif;
 }
+
 
 
 
