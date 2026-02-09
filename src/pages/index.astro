@@ -11,46 +11,60 @@ const description = indexPage?.data.description || '';
 ---
 
 <Layout title={title} description={description}>
-  <script is:inline>
-    document.body.classList.add("home");
-  </script>
-
+ 
   <!-- HERO -->
   <section class="hero">
-  <div class="hero-text">
-    <p class="intro">Hello, I’m</p>
+    <div class="hero-text">
+      <p
+        class="intro"
+        data-en="Hello, I’m"
+        data-es="Hola, soy">
+        Hello, I’m
+      </p>
 
-    <h1>Mariana Ovallos</h1>
+      <h1>Mariana Ovallos</h1>
 
-    <p class="subtitle">
-      Systems engineering student focused on cybersecurity,
-      databases, and practical technology projects.
-    </p>
-  </div>
-
-  <div class="hero-photo">
-    <div class="photo-circle">
-      Photo
+      <p
+        class="subtitle"
+        data-en="Systems engineering student focused on cybersecurity, databases, and practical technology projects."
+        data-es="Estudiante de ingeniería de sistemas enfocada en ciberseguridad, bases de datos y proyectos tecnológicos.">
+        Systems engineering student focused on cybersecurity, databases, and practical technology projects.
+      </p>
     </div>
-  </div>
-</section>
 
+    <div class="hero-photo">
+      <div class="photo-circle">
+        <img src="/profile.jpg" alt="Profile photo" />
+      </div>
+    </div>
+  </section>
 
+  <!-- PRESENTATION -->
   <section class="presentation">
-  <div class="presentation-box">
-    <h2>Presentation</h2>
+    <div class="presentation-box">
+      <h2
+        data-en="Presentation"
+        data-es="Presentación">
+        Presentation
+      </h2>
 
-    <div class="video-placeholder">
-      Video will be added here
+      <video
+  class="presentation-video"
+  controls
+  preload="metadata">
+  <source src="/src/assets/video/prueba.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+      <p
+        class="presentation-text"
+        data-en="Welcome to my personal portfolio. Here you will find my academic projects, technical evidence, and professional growth."
+        data-es="Bienvenido a mi portafolio personal. Aquí encontrarás mis proyectos académicos, evidencias técnicas y crecimiento profesional.">
+        Welcome to my personal portfolio. Here you will find my academic projects, technical evidence, and professional growth.
+      </p>
     </div>
-
-    <p class="presentation-text">
-      Welcome to my personal portfolio.  
-      Here you will find my academic projects, technical evidence, and professional growth.
-    </p>
-  </div>
-</section>
-
+  </section>
 
   <!-- PORTFOLIO CARDS -->
   <section class="portfolio">
@@ -66,69 +80,71 @@ const description = indexPage?.data.description || '';
 /* HERO */
 .hero {
   max-width: 1100px;
-  margin: 8rem auto 6rem;
-  padding: 5rem 4rem;
+  margin: 6rem auto 4rem;
+  padding: 4rem 5rem;
 
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: 1.2fr 0.8fr;
   align-items: center;
-  gap: 4rem;
+  gap: 3rem;
 
   background: linear-gradient(
-  135deg,
-  #6f9488,
-  #8f83c9
-);
-
+    135deg,
+    #c5a68a,
+    #8b6a55
+  );
 
   color: white;
-  border-radius: 40px;
+  border-radius: 36px;
 }
 
-
 .intro {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   opacity: 0.9;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .hero-text h1 {
   color: white;
-  font-size: 5.4rem;
+  font-size: 4.6rem;
   line-height: 1.1;
   margin-bottom: 1.2rem;
   font-weight: 800;
   text-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-
 .subtitle {
   color: rgba(255,255,255,0.9);
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   max-width: 420px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
+.hero-photo {
+  display: flex;
+  justify-content: center;
+}
 
 .photo-circle {
-  width: 240px;
-  height: 240px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  background: linear-gradient(
-    145deg,
-    #ffffff,
-    var(--color-bg)
-  );
-  border: 2px solid var(--color-accent);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
-  color: var(--color-accent);
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.6);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.photo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* PORTFOLIO */
 .portfolio-card {
   height: 220px;
   border-radius: 24px;
-  background: #ffffff;
+  background: var(--color-card);
   border: 2px solid transparent;
   box-shadow: 0 15px 40px rgba(0,0,0,0.06);
   transition: all 0.35s ease;
@@ -158,15 +174,7 @@ const description = indexPage?.data.description || '';
   border-color: var(--color-primary);
 }
 
-
-/* RESPONSIVE */
-@media (max-width: 850px) {
-  .hero {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
-
+/* PRESENTATION */
 .presentation {
   max-width: 900px;
   margin: 4rem auto 6rem;
@@ -174,7 +182,7 @@ const description = indexPage?.data.description || '';
 }
 
 .presentation-box {
-  background: #ffffff;
+  background: var(--color-card);
   border-radius: 32px;
   padding: 3rem;
   box-shadow: 0 20px 50px rgba(0,0,0,0.06);
@@ -207,4 +215,28 @@ const description = indexPage?.data.description || '';
   color: var(--color-base);
 }
 
+.presentation-video {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .hero-text h1 {
+    font-size: 3.4rem;
+  }
+
+  .photo-circle {
+    margin-top: 2rem;
+  }
+}
 </style>

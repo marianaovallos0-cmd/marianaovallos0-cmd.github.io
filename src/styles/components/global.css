@@ -1,15 +1,3 @@
-:root {
-    /* Colores visibles pero elegantes */
-    --color-primary: #7fa89a;   /* sage green vivo */
-    --color-base: #1f2a33;      /* texto azul oscuro */
-    --color-border: #d9e2dd;    /* borde suave */
-    --color-bg: #f7faf9;        /* fondo NO blanco puro */
-
-    --font-sans-serif: 'League Spartan', 'Trebuchet MS', sans-serif;
-    --font-serif: 'EB Garamond', Georgia, serif;
-}
-
-
 /* Base reset */
 * {
   box-sizing: border-box;
@@ -20,7 +8,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
   background-color: var(--color-bg);
-  color: var(--color-text-main);
+  color: var(--color-base);
   line-height: 1.6;
 }
 
@@ -38,4 +26,12 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+html,
+body,
+.site-wrapper,
+.site-main {
+  background: var(--color-bg);
+  color: var(--color-base);
 }

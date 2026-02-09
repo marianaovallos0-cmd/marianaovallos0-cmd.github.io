@@ -9,104 +9,119 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const { title, description, thumbnail } = entry.data;
+const rawTitle = entry.data.title || "";
+const [esTitle, enTitle] = rawTitle.split(" / ");
 ---
 
-<Layout title={entry.data.title}>
-  {entry.slug === "bio" ? (
-    <section class="about-section">
-      <div class="about-card">
-        <article class="post-content">
-          <div class="post-content-body">
-            <Content />
+<Layout title={rawTitle}>
+  <article class="post-content">
+
+    <h1
+      class="page-head-title"
+      data-en={enTitle || rawTitle}
+      data-es={esTitle || rawTitle}>
+      {enTitle || rawTitle}
+    </h1>
+
+    <div class="post-content-body">
+      <Content />
+    </div>
+
+    {entry.slug.includes("evidencias") && (
+
+      <section class="evidence-section">
+        <div class="evidence-grid">
+
+          <a href="/sql/" class="evidence-card">
+            <div class="evidence-icon">SQL</div>
+            <h3 class="evidence-title" data-en="SQL Scripts" data-es="Scripts SQL">
+              SQL Scripts
+            </h3>
+          </a>
+
+          <a href="/plsql/" class="evidence-card">
+            <div class="evidence-icon">PL/SQL</div>
+            <h3 class="evidence-title" data-en="PL/SQL Scripts" data-es="Scripts PL/SQL">
+              PL/SQL Scripts
+            </h3>
+          </a>
+
+          <a href="/nosql/" class="evidence-card">
+            <div class="evidence-icon">NoSQL</div>
+            <h3 class="evidence-title" data-en="NoSQL" data-es="NoSQL">
+              NoSQL
+            </h3>
+          </a>
+
+          <a href="/proyecto/" class="evidence-card">
+            <div class="evidence-icon">PRJ</div>
+            <h3 class="evidence-title" data-en="Project" data-es="Proyecto">
+              Project
+            </h3>
+          </a>
+
+        </div>
+      </section>
+    )}
+
+    {entry.slug.includes("sql") && !entry.slug.includes("plsql") && (
+
+      <section class="evidence-section">
+        <div class="evidence-grid">
+
+          <div class="evidence-card">
+            <h3 class="evidence-title" data-en="Activity 1" data-es="Actividad 1">
+              Activity 1
+            </h3>
+            <pre>
+SELECT
+E.FIRST_NAME,
+COUNT(JH.DEPARTMENT_ID)
+FROM HR.EMPLOYEES E
+JOIN HR.JOB_HISTORY JH
+ON E.EMPLOYEE_ID = JH.EMPLOYEE_ID
+GROUP BY E.FIRST_NAME;
+            </pre>
           </div>
-        </article>
-      </div>
-    </section>
-  ) : (
-    <article class="post-content">
-      <div class="post-content-body">
-        <Content />
 
-        {entry.slug === "evidencias" && (
-          <section class="evidence-section">
-            <div class="evidence-grid">
+          <div class="evidence-card">
+            <h3 class="evidence-title" data-en="Activity 2" data-es="Actividad 2">
+              Activity 2
+            </h3>
+            <pre>
+SELECT
+E.FIRST_NAME || ' ' || E.LAST_NAME AS NOMBRE,
+CO.COUNTRY_NAME AS PAIS,
+E.SALARY
+FROM HR.EMPLOYEES E
+JOIN HR.DEPARTMENTS D
+ON E.DEPARTMENT_ID= D.DEPARTMENT_ID
+JOIN HR.LOCATIONS L
+ON D.LOCATION_ID = L.LOCATION_ID
+JOIN HR.COUNTRIES CO
+ON L.COUNTRY_ID = CO.COUNTRY_ID
+WHERE REGION_ID = 10
+AND SALARY BETWEEN 7000 AND 9000;
+            </pre>
+          </div>
 
-              <div class="evidence-card">
-                <div class="evidence-icon">SQL</div>
-                <h3 class="evidence-title">SQL Scripts</h3>
-                <p class="evidence-desc">
-                  Database queries, joins, views, and optimization exercises.
-                </p>
-              </div>
+          <div class="evidence-card">
+            <h3 class="evidence-title" data-en="Activity 3" data-es="Actividad 3">
+              Activity 3
+            </h3>
+            <pre>
+SELECT
+E.FIRST_NAME || ' ' || E.LAST_NAME AS NOMBRE_EMPLEADO,
+M.FIRST_NAME || ' ' || M.LAST_NAME AS NOMBRE_MANAGER
+FROM HR.EMPLOYEES E
+LEFT JOIN HR.EMPLOYEES M
+ON E.MANAGER_ID = M.EMPLOYEE_ID;
+            </pre>
+          </div>
 
-              <div class="evidence-card">
-                <div class="evidence-icon">PL/SQL</div>
-                <h3 class="evidence-title">PL/SQL Programs</h3>
-                <p class="evidence-desc">
-                  Stored procedures, functions, triggers, and database logic.
-                </p>
-              </div>
+        </div>
+      </section>
+    )}
 
-              <div class="evidence-card">
-                <div class="evidence-icon">NoSQL</div>
-                <h3 class="evidence-title">NoSQL Experiments</h3>
-                <p class="evidence-desc">
-                  Document-based and non-relational database models.
-                </p>
-              </div>
-
-              <div class="evidence-card">
-                <div class="evidence-icon">SYS</div>
-                <h3 class="evidence-title">Final Project</h3>
-                <p class="evidence-desc">
-                  Integrated system with database design and logic.
-                </p>
-              </div>
-
-            </div>
-          </section>
-        )}
-
-        {entry.slug === "work" && (
-          <section class="work-section">
-            <div class="work-grid">
-
-              <div class="work-card">
-                <h3 class="work-title">Database Project</h3>
-                <p class="work-desc">
-                  Design and implementation of relational database systems
-                  using SQL and PL/SQL.
-                </p>
-                <span class="work-tag">SQL</span>
-                <span class="work-tag">PL/SQL</span>
-              </div>
-
-              <div class="work-card">
-                <h3 class="work-title">Cybersecurity Lab</h3>
-                <p class="work-desc">
-                  Practical security exercises including vulnerability
-                  analysis and basic penetration testing.
-                </p>
-                <span class="work-tag">Security</span>
-                <span class="work-tag">Networking</span>
-              </div>
-
-              <div class="work-card">
-                <h3 class="work-title">Embedded System</h3>
-                <p class="work-desc">
-                  Microcontroller-based project integrating sensors,
-                  control logic, and real-time communication.
-                </p>
-                <span class="work-tag">STM32</span>
-                <span class="work-tag">C</span>
-              </div>
-
-            </div>
-          </section>
-        )}
-
-      </div>
-    </article>
-  )}
+  </article>
 </Layout>

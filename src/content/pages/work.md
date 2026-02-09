@@ -1,4 +1,4 @@
 ---
 templateKey: page
-title: Work
+title: Proyectos / Work
 ---

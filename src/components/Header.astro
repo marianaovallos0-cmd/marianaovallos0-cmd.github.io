@@ -9,72 +9,44 @@ const { title } = Astro.props;
 <header class="site-head">
     <div class="site-head-container">
         <a class="nav-burger" href="#">
-            <div class="hamburger hamburger--collapse" aria-label="Menu" role="button" aria-controls="navigation">
+            <div class="hamburger hamburger--collapse">
                 <div class="hamburger-box">
                     <div class="hamburger-inner" />
                 </div>
             </div>
         </a>
 
-        <nav id="swup" class="site-head-left">
+        <nav class="site-head-left">
             <ul class="nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/bio/">About</a></li>
-                <li><a href="/work/">Work</a></li>
-                <li><a href="/contact/">Contact</a></li>
-                <li><a href="/evidencias/">Evidencias</a></li>
+                <li>
+                    <a href="/" data-en="Home" data-es="Inicio">Home</a>
+                </li>
+                <li>
+                    <a href="/bio/" data-en="About" data-es="Sobre mí">About</a>
+                </li>
+                <li>
+                    <a href="/work/" data-en="Work" data-es="Proyectos">Work</a>
+                </li>
+                <li>
+                    <a href="/contact/" data-en="Contact" data-es="Contacto">Contact</a>
+                </li>
+                <li>
+                    <a href="/evidencias/" data-en="Evidence" data-es="Evidencias">Evidence</a>
+                </li>
             </ul>
         </nav>
 
         <div class="site-head-center">
             <a class="site-head-logo" href="/">
-                {title || "Clay"}
+                {title || "Portfolio"}
             </a>
         </div>
 
         <div class="site-head-right">
             <div class="social-links">
-
-                <!-- Theme toggle button -->
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-
-                    <!-- Moon icon (visible in light mode) -->
-                    <svg
-                        class="moon-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path d="M21.75 15.5A9.75 9.75 0 1 1 8.5 2.25 7.75 7.75 0 1 0 21.75 15.5z"/>
-                    </svg>
-
-                    <!-- Sun icon (visible in dark mode) -->
-                    <svg
-                        class="sun-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        style="display:none"
-                    >
-                        <circle cx="12" cy="12" r="5"/>
-                        <g stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="1" x2="12" y2="4"/>
-                            <line x1="12" y1="20" x2="12" y2="23"/>
-                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
-                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
-                            <line x1="1" y1="12" x2="4" y2="12"/>
-                            <line x1="20" y1="12" x2="23" y2="12"/>
-                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
-                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
-                        </g>
-                    </svg>
-
+                <button id="lang-toggle" class="lang-toggle">
+                    <span id="lang-text">EN</span>
                 </button>
-
             </div>
         </div>
     </div>

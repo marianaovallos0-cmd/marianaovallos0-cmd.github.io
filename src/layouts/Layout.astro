@@ -3,7 +3,6 @@ import "../styles/vars.css";
 import "../styles/content.css";
 import "../styles/layout.css";
 
-import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -17,97 +16,96 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content={description || "Clay Theme"} />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title || "Clay"}</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || "Portfolio"} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title || "Portfolio"}</title>
 
-        <ClientRouter />
+    <script is:inline>
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.setAttribute("lang", savedLang);
 
-        <!-- Theme initialization BEFORE page renders -->
-        <script is:inline>
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme === "dark") {
-                document.documentElement.setAttribute("data-theme", "dark");
-            } else {
-                document.documentElement.setAttribute("data-theme", "light");
-            }
-        </script>
-    </head>
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${savedLang}`);
+            if (text) el.textContent = text;
+        });
+    });
+</script>
 
-    <body class="site-wrapper">
-        <Header title={title} />
 
-        <main id="site-main" class="site-main">
-            <div id="swup" class="transition-fade">
-                <slot />
-            </div>
-        </main>
+   
+</head>
 
-        <Footer />
+<body class="site-wrapper">
+    <Header title={title} />
 
-        <script>
-            function initNav() {
-                const burger = document.querySelector(".nav-burger");
-                const wrapper = document.querySelector(".site-wrapper");
-                if (burger && wrapper) {
-                    burger.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        wrapper.classList.toggle("site-head-open");
-                    });
-                }
-            }
+    <main id="site-main" class="site-main">
+        <slot />
+    </main>
 
-            function initTheme() {
-                const toggleBtn = document.getElementById("theme-toggle");
 
-                const updateIcon = () => {
-                    const isDark =
-                        document.documentElement.getAttribute("data-theme") ===
-                        "dark";
+    <Footer />
 
-                    const sun = document.querySelector(".sun-icon");
-                    const moon = document.querySelector(".moon-icon");
+    <script>
+    function setLanguage(lang) {
+        document.documentElement.setAttribute("lang", lang);
+        localStorage.setItem("lang", lang);
 
-                    if (sun && moon) {
-                        sun.style.display = isDark ? "inline-block" : "none";
-                        moon.style.display = isDark ? "none" : "inline-block";
-                    }
-                };
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${lang}`);
+            if (text) el.textContent = text;
+        });
 
-                updateIcon();
+        const langText = document.getElementById("lang-text");
+        if (langText) {
+            langText.textContent = lang === "en" ? "ES" : "EN";
+        }
+    }
 
-                if (toggleBtn) {
-                    toggleBtn.addEventListener("click", () => {
-                        const current =
-                            document.documentElement.getAttribute("data-theme");
+    function initLanguage() {
+        const savedLang = localStorage.getItem("lang") || "en";
+        setLanguage(savedLang);
 
-                        const next = current === "dark" ? "light" : "dark";
+        const langBtn = document.getElementById("lang-toggle");
+        if (langBtn) {
+            langBtn.onclick = () => {
+                const current =
+                    document.documentElement.getAttribute("lang") || "en";
+                const next = current === "en" ? "es" : "en";
+                setLanguage(next);
+            };
+        }
+    }
 
-                        document.documentElement.setAttribute(
-                            "data-theme",
-                            next,
-                        );
-                        localStorage.setItem("theme", next);
+    function initNav() {
+        const burger = document.querySelector(".nav-burger");
+        const wrapper = document.querySelector(".site-wrapper");
+        if (burger && wrapper) {
+            burger.onclick = (e) => {
+                e.preventDefault();
+                wrapper.classList.toggle("site-head-open");
+            };
+        }
+    }
 
-                        updateIcon();
-                    });
-                }
-            }
+    function initAll() {
+        initNav();
+        initLanguage();
+    }
 
-            document.addEventListener("astro:page-load", () => {
-                initNav();
-                initTheme();
-            });
+    // Carga normal
+    document.addEventListener("DOMContentLoaded", initAll);
 
-            document.addEventListener("astro:after-swap", () => {
-                const theme = localStorage.getItem("theme") || "light";
-                document.documentElement.setAttribute("data-theme", theme);
-            });
-        </script>
-    </body>
+    // Navegación interna de Astro
+    document.addEventListener("astro:page-load", initAll);
+</script>
+
+</body>
 </html>

@@ -509,10 +509,11 @@ production stylesheet in assets/built/screen.css using gulp dev
   font-size: 1.2rem;
   padding: 0.4rem 1rem;
   border-radius: 999px;
-  background: rgba(109, 139, 255, 0.1);
-  color: #4f46e5;
+  background: rgba(145, 175, 160, 0.15);
+  color: #4b6b5f;
   margin-right: 0.5rem;
 }
+
 
 /* Evidencias section – academic showcase */
 
@@ -584,17 +585,39 @@ production stylesheet in assets/built/screen.css using gulp dev
   line-height: 1.6;
 }
 
-/* Dark mode cards */
 
-[data-theme='dark'] .about-card,
-[data-theme='dark'] .work-card,
-[data-theme='dark'] .evidence-card {
-  background: #111c18;
-  border: 1px solid rgba(201,180,88,0.45);
-  box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+
+
+
+/* =========================
+   Global Theme Colors
+   ========================= */
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-base);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Enlaces */
+a {
+  color: var(--color-primary);
+}
 
+/* Navegación */
+.site-head {
+  background: transparent;
+}
+
+.site-head a {
+  color: var(--color-base);
+}
+
+/* Contenedor principal */
+.site-main {
+  background: var(--color-bg);
+}
 
 
 
@@ -604,3 +627,5 @@ production stylesheet in assets/built/screen.css using gulp dev
 img.gatsby-resp-image-image { border-radius: 10px !important;}
 
 img {border-radius: 10px;}
+
+
