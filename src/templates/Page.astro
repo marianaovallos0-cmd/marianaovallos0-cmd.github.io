@@ -30,98 +30,108 @@ const [esTitle, enTitle] = rawTitle.split(" / ");
     {entry.slug.includes("evidencias") && (
 
       <section class="evidence-section">
-        <div class="evidence-grid">
+  <div class="evidence-grid">
 
-          <a href="/sql/" class="evidence-card">
-            <div class="evidence-icon">SQL</div>
-            <h3 class="evidence-title" data-en="SQL Scripts" data-es="Scripts SQL">
-              SQL Scripts
-            </h3>
-          </a>
+    <a href="/sql/" class="evidence-card">
+      <div class="evidence-icon">SQL</div>
+      <h3 class="evidence-title" data-en="SQL Scripts" data-es="Scripts SQL">
+        SQL Scripts
+      </h3>
+      <p class="evidence-desc"
+         data-en="Database queries, joins, views, and optimization exercises."
+         data-es="Consultas, joins, vistas y ejercicios de optimización.">
+        Database queries, joins, views, and optimization exercises.
+      </p>
+    </a>
 
-          <a href="/plsql/" class="evidence-card">
-            <div class="evidence-icon">PL/SQL</div>
-            <h3 class="evidence-title" data-en="PL/SQL Scripts" data-es="Scripts PL/SQL">
-              PL/SQL Scripts
-            </h3>
-          </a>
+    <a href="/plsql/" class="evidence-card">
+      <div class="evidence-icon">PL/SQL</div>
+      <h3 class="evidence-title" data-en="PL/SQL Scripts" data-es="Scripts PL/SQL">
+        PL/SQL Scripts
+      </h3>
+      <p class="evidence-desc"
+         data-en="Stored procedures, functions, triggers, and database logic."
+         data-es="Procedimientos almacenados, funciones, triggers y lógica de base de datos.">
+        Stored procedures, functions, triggers, and database logic.
+      </p>
+    </a>
 
-          <a href="/nosql/" class="evidence-card">
-            <div class="evidence-icon">NoSQL</div>
-            <h3 class="evidence-title" data-en="NoSQL" data-es="NoSQL">
-              NoSQL
-            </h3>
-          </a>
+    <a href="/nosql/" class="evidence-card">
+      <div class="evidence-icon">NoSQL</div>
+      <h3 class="evidence-title" data-en="NoSQL" data-es="NoSQL">
+        NoSQL
+      </h3>
+      <p class="evidence-desc"
+         data-en="Document-based and non-relational database models."
+         data-es="Modelos de bases de datos documentales y no relacionales.">
+        Document-based and non-relational database models.
+      </p>
+    </a>
 
-          <a href="/proyecto/" class="evidence-card">
-            <div class="evidence-icon">PRJ</div>
-            <h3 class="evidence-title" data-en="Project" data-es="Proyecto">
-              Project
-            </h3>
-          </a>
+    <a href="/proyecto/" class="evidence-card">
+      <div class="evidence-icon">PRJ</div>
+      <h3 class="evidence-title" data-en="Project" data-es="Proyecto">
+        Project
+      </h3>
+      <p class="evidence-desc"
+         data-en="Integrated system with database design and logic."
+         data-es="Sistema integrado con diseño y lógica de base de datos.">
+        Integrated system with database design and logic.
+      </p>
+    </a>
 
-        </div>
-      </section>
+  </div>
+</section>
+
     )}
 
-    {entry.slug.includes("sql") && !entry.slug.includes("plsql") && (
+   {entry.slug === "sql" && (
 
-      <section class="evidence-section">
-        <div class="evidence-grid">
+  <section class="evidence-section">
+    <div class="evidence-grid">
 
-          <div class="evidence-card">
-            <h3 class="evidence-title" data-en="Activity 1" data-es="Actividad 1">
-              Activity 1
-            </h3>
-            <pre>
-SELECT
-E.FIRST_NAME,
-COUNT(JH.DEPARTMENT_ID)
-FROM HR.EMPLOYEES E
-JOIN HR.JOB_HISTORY JH
-ON E.EMPLOYEE_ID = JH.EMPLOYEE_ID
-GROUP BY E.FIRST_NAME;
-            </pre>
-          </div>
+      <a href="/sql/actividad-1/" class="evidence-card">
+        <h3 class="evidence-title"
+            data-en="Activity 1"
+            data-es="Actividad 1">
+          Activity 1
+        </h3>
+        <p class="evidence-desc"
+           data-en="Employee job count analysis."
+           data-es="Análisis de cantidad de cargos por empleado.">
+          Employee job count analysis.
+        </p>
+      </a>
 
-          <div class="evidence-card">
-            <h3 class="evidence-title" data-en="Activity 2" data-es="Actividad 2">
-              Activity 2
-            </h3>
-            <pre>
-SELECT
-E.FIRST_NAME || ' ' || E.LAST_NAME AS NOMBRE,
-CO.COUNTRY_NAME AS PAIS,
-E.SALARY
-FROM HR.EMPLOYEES E
-JOIN HR.DEPARTMENTS D
-ON E.DEPARTMENT_ID= D.DEPARTMENT_ID
-JOIN HR.LOCATIONS L
-ON D.LOCATION_ID = L.LOCATION_ID
-JOIN HR.COUNTRIES CO
-ON L.COUNTRY_ID = CO.COUNTRY_ID
-WHERE REGION_ID = 10
-AND SALARY BETWEEN 7000 AND 9000;
-            </pre>
-          </div>
+      <a href="/sql/actividad-2/" class="evidence-card">
+        <h3 class="evidence-title"
+            data-en="Activity 2"
+            data-es="Actividad 2">
+          Activity 2
+        </h3>
+        <p class="evidence-desc"
+           data-en="Employees in Europe with salary filter."
+           data-es="Empleados en Europa con filtro de salario.">
+          Employees in Europe with salary filter.
+        </p>
+      </a>
 
-          <div class="evidence-card">
-            <h3 class="evidence-title" data-en="Activity 3" data-es="Actividad 3">
-              Activity 3
-            </h3>
-            <pre>
-SELECT
-E.FIRST_NAME || ' ' || E.LAST_NAME AS NOMBRE_EMPLEADO,
-M.FIRST_NAME || ' ' || M.LAST_NAME AS NOMBRE_MANAGER
-FROM HR.EMPLOYEES E
-LEFT JOIN HR.EMPLOYEES M
-ON E.MANAGER_ID = M.EMPLOYEE_ID;
-            </pre>
-          </div>
+      <a href="/sql/actividad-3/" class="evidence-card">
+        <h3 class="evidence-title"
+            data-en="Activity 3"
+            data-es="Actividad 3">
+          Activity 3
+        </h3>
+        <p class="evidence-desc"
+           data-en="Employee and manager relationship."
+           data-es="Relación entre empleados y sus managers.">
+          Employee and manager relationship.
+        </p>
+      </a>
 
-        </div>
-      </section>
-    )}
+    </div>
+  </section>
+)}
 
   </article>
 </Layout>

@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const scripts = await getCollection("sql");
+
+  return scripts.map((script) => ({
+    params: { slug: script.slug },
+    props: { script },
+  }));
+}
+
+const { script } = Astro.props;
+const { Content } = await script.render();
+---
+
+<Layout title={script.data.title}>
+  <article class="post-content">
+
+    <h1 class="page-head-title">
+      {script.data.title}
+    </h1>
+
+    <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
+      {script.data.description}
+    </p>
+
+    <div class="post-content-body">
+      <Content />
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="/sql/" class="back-button">
+        ← Back to SQL
+      </a>
+    </div>
+
+  </article>
+</Layout>
+
+<style>
+.back-button {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.85;
+}
+</style>

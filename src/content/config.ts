@@ -35,9 +35,17 @@ const pages = defineCollection({
   schema: commonSchema,
 });
 
+const sql = defineCollection({
+  type: 'content',
+  schema: commonSchema,
+});
+
+
 export const collections = {
   news,
   work,
   sold,
   pages,
+  sql,
 };
+

@@ -4,18 +4,32 @@ import Page from "../templates/Page.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
+  const sql = await getCollection("sql");
 
-  return pages.map((page) => ({
+  const pagePaths = pages.map((page) => ({
     params: { slug: page.slug },
-    props: { entry: page },
+    props: { entry: page, type: "page" },
   }));
+
+  const sqlPaths = sql.map((script) => ({
+    params: { slug: `sql/${script.slug}` },
+    props: { entry: script, type: "sql" },
+  }));
+
+  return [...pagePaths, ...sqlPaths];
 }
+
 
 interface Props {
-  entry: CollectionEntry<"pages">;
+  entry: CollectionEntry<any>;
+  type: string;
 }
 
-const { entry } = Astro.props;
+const { entry, type } = Astro.props;
 ---
 
-<Page entry={entry} />
+{type === "page" && <Page entry={entry} />}
+
+{type === "sql" && (
+  <Page entry={entry} />
+)}
