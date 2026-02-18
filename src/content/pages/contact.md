@@ -9,5 +9,5 @@ You can reach me through the following channels.
 </p>
 
 - Email: marianaovallos0@gmail.com  
-- LinkedIn: linkedin.com/in/yourprofile  
+- LinkedIn: linkedin.com/in/mariana-ovallos-602676387 
 - GitHub: github.com/marianaovallos0-cmd
