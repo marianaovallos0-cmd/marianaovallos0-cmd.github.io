@@ -1,7 +1,7 @@
 {
-  "$ref": "#/definitions/work",
+  "$ref": "#/definitions/plsql",
   "definitions": {
-    "work": {
+    "plsql": {
       "type": "object",
       "properties": {
         "title": {

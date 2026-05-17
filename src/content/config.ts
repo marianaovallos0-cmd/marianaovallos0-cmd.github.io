@@ -22,12 +22,8 @@ const sold = defineCollection({ type: 'content', schema: commonSchema });
 const pages = defineCollection({ type: 'content', schema: commonSchema });
 const sql = defineCollection({ type: 'content', schema: commonSchema });
 const plsql = defineCollection({ type: 'content', schema: commonSchema });
+const nosql = defineCollection({ type: 'content', schema: commonSchema });
 
 export const collections = {
-  news,
-  work,
-  sold,
-  pages,
-  sql,
-  plsql,
+  news, work, sold, pages, sql, plsql, nosql,
 };

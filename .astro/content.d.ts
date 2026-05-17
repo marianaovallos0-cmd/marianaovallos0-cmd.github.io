@@ -172,6 +172,14 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"nosql": Record<string, {
+  id: string;
+  body?: string;
+  collection: "nosql";
+  data: any;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 "pages": Record<string, {
   id: string;
   render(): Render[".md"];
@@ -179,6 +187,16 @@ declare module 'astro:content' {
   body: string;
   collection: "pages";
   data: InferEntrySchema<"pages">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"plsql": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "plsql";
+  data: InferEntrySchema<"plsql">;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
