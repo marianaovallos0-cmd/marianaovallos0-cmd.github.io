@@ -36,7 +36,7 @@ Un sistema web completo con:
 | Base de datos relacional | PostgreSQL |
 | Base de datos NoSQL | MongoDB |
 | Frontend | React |
-| Virtualización | Linux/Ubuntu VM |
+| Virtualización | Linux/Debian |
 | Control de versiones | Git / GitHub |
 
 ---
