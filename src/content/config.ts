@@ -6,40 +6,22 @@ const commonSchema = z.object({
   date: z.date().optional(),
   thumbnail: z.string().optional(),
   templateKey: z.string().optional(),
-  // Add other fields as discovered
   image: z.string().optional(),
   featuredimage: z.string().optional(),
   heading: z.string().optional(),
   subheading: z.string().optional(),
   number: z.number().optional(),
   pagetype: z.array(z.string()).optional(),
+  author: z.string().optional(),
+  tags: z.array(z.string()).optional(),
 }).partial();
 
-const news = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
-const work = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
-const sold = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
-const pages = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
-const sql = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
+const news = defineCollection({ type: 'content', schema: commonSchema });
+const work = defineCollection({ type: 'content', schema: commonSchema });
+const sold = defineCollection({ type: 'content', schema: commonSchema });
+const pages = defineCollection({ type: 'content', schema: commonSchema });
+const sql = defineCollection({ type: 'content', schema: commonSchema });
+const plsql = defineCollection({ type: 'content', schema: commonSchema });
 
 export const collections = {
   news,
@@ -47,5 +29,5 @@ export const collections = {
   sold,
   pages,
   sql,
+  plsql,
 };
-

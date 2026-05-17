@@ -1,10 +1,12 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Page from "../templates/Page.astro";
+import Layout from "../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
   const sql = await getCollection("sql");
+  const plsql = await getCollection("plsql");
 
   const pagePaths = pages.map((page) => ({
     params: { slug: page.slug },
@@ -16,9 +18,13 @@ export async function getStaticPaths() {
     props: { entry: script, type: "sql" },
   }));
 
-  return [...pagePaths, ...sqlPaths];
-}
+  const plsqlPaths = plsql.map((script) => ({
+    params: { slug: `plsql/${script.slug}` },
+    props: { entry: script, type: "plsql" },
+  }));
 
+  return [...pagePaths, ...sqlPaths, ...plsqlPaths];
+}
 
 interface Props {
   entry: CollectionEntry<any>;
@@ -26,10 +32,67 @@ interface Props {
 }
 
 const { entry, type } = Astro.props;
+const { Content } = await entry.render();
 ---
 
 {type === "page" && <Page entry={entry} />}
 
 {type === "sql" && (
-  <Page entry={entry} />
+  <Layout title={entry.data.title}>
+    <article class="post-content">
+      <h1 class="page-head-title">{entry.data.title}</h1>
+      {entry.data.author && (
+        <p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;">
+          Autor: {entry.data.author}
+        </p>
+      )}
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
+        {entry.data.description}
+      </p>
+      <div class="post-content-body">
+        <Content />
+      </div>
+      <div style="text-align:center; margin-top:3rem;">
+        <a href="/sql/" class="back-button">← Back to SQL</a>
+      </div>
+    </article>
+  </Layout>
 )}
+
+{type === "plsql" && (
+  <Layout title={entry.data.title}>
+    <article class="post-content">
+      <h1 class="page-head-title">{entry.data.title}</h1>
+      {entry.data.author && (
+        <p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;">
+          Autor: {entry.data.author}
+        </p>
+      )}
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
+        {entry.data.description}
+      </p>
+      <div class="post-content-body">
+        <Content />
+      </div>
+      <div style="text-align:center; margin-top:3rem;">
+        <a href="/plsql/" class="back-button">← Back to PL/SQL</a>
+      </div>
+    </article>
+  </Layout>
+)}
+
+<style>
+.back-button {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+.back-button:hover {
+  opacity: 0.85;
+}
+</style>
