@@ -1,8 +1,4 @@
 ---
 templateKey: page
-title: Proyecto / Project
+title: Project / Proyecto
 ---
-
-## Proyecto Final
-
-Aquí se mostrará el proyecto integrado del curso.

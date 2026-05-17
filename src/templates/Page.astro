@@ -140,5 +140,43 @@ const [esTitle, enTitle] = rawTitle.split(" / ");
       </section>
     )}
 
+    {entry.slug === "proyecto" && (
+  <section class="evidence-section">
+    <div class="evidence-grid">
+
+      <a href="/proyecto/overview/" class="evidence-card">
+        <div class="evidence-icon">OVW</div>
+        <h3 class="evidence-title" data-en="Overview" data-es="Visión General">Overview</h3>
+        <p class="evidence-desc"
+           data-en="Problem, solution, tech stack and repositories."
+           data-es="Problema, solución, stack tecnológico y repositorios.">
+          Problem, solution, tech stack and repositories.
+        </p>
+      </a>
+
+      <a href="/proyecto/base-de-datos/" class="evidence-card">
+        <div class="evidence-icon">DB</div>
+        <h3 class="evidence-title" data-en="Relational Database" data-es="Base de Datos Relacional">Relational Database</h3>
+        <p class="evidence-desc"
+           data-en="PostgreSQL schema: 12 entities, functions, triggers, procedures and views."
+           data-es="Esquema PostgreSQL: 12 entidades, funciones, triggers, procedimientos y vistas.">
+          PostgreSQL schema: 12 entities, functions, triggers, procedures and views.
+        </p>
+      </a>
+
+      <a href="/proyecto/gestion/" class="evidence-card">
+        <div class="evidence-icon">MGT</div>
+        <h3 class="evidence-title" data-en="Project Management" data-es="Gestión del Proyecto">Project Management</h3>
+        <p class="evidence-desc"
+           data-en="Scrum, Gantt, RACI matrix and risk management."
+           data-es="Scrum, Gantt, matriz RACI y gestión de riesgos.">
+          Scrum, Gantt, RACI matrix and risk management.
+        </p>
+      </a>
+
+    </div>
+  </section>
+)}
+
   </article>
 </Layout>

@@ -8,6 +8,7 @@ export async function getStaticPaths() {
   const sql = await getCollection("sql");
   const plsql = await getCollection("plsql");
   const nosql = await getCollection("nosql");
+  const proyecto = await getCollection("proyecto");
 
   const pagePaths = pages.map((page) => ({
     params: { slug: page.slug },
@@ -29,7 +30,12 @@ export async function getStaticPaths() {
     props: { entry: script, type: "nosql" },
   }));
 
-  return [...pagePaths, ...sqlPaths, ...plsqlPaths, ...nosqlPaths];
+  const proyectoPaths = proyecto.map((script) => ({
+  params: { slug: `proyecto/${script.slug}` },
+  props: { entry: script, type: "proyecto" },
+  }));
+
+  return [...pagePaths, ...sqlPaths, ...plsqlPaths, ...nosqlPaths, ...proyectoPaths];
 }
 
 interface Props {
@@ -98,6 +104,21 @@ const { Content } = await entry.render();
       <div class="post-content-body"><Content /></div>
       <div style="text-align:center; margin-top:3rem;">
         <a href="/nosql/" class="back-button">← Back to NoSQL</a>
+      </div>
+    </article>
+  </Layout>
+)}
+
+{type === "proyecto" && (
+  <Layout title={entry.data.title}>
+    <article class="post-content">
+      <h1 class="page-head-title">{entry.data.title}</h1>
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
+        {entry.data.description}
+      </p>
+      <div class="post-content-body"><Content /></div>
+      <div style="text-align:center; margin-top:3rem;">
+        <a href="/proyecto/" class="back-button">← Back to Project</a>
       </div>
     </article>
   </Layout>

@@ -23,7 +23,6 @@ const pages = defineCollection({ type: 'content', schema: commonSchema });
 const sql = defineCollection({ type: 'content', schema: commonSchema });
 const plsql = defineCollection({ type: 'content', schema: commonSchema });
 const nosql = defineCollection({ type: 'content', schema: commonSchema });
+const proyecto = defineCollection({ type: 'content', schema: commonSchema });
 
-export const collections = {
-  news, work, sold, pages, sql, plsql, nosql,
-};
+export const collections = { news, work, sold, pages, sql, plsql, nosql, proyecto };
