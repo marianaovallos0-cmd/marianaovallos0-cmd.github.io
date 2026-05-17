@@ -1,4 +1,5 @@
 ---
 templateKey: page
-title: Project / Proyecto
+title: Proyecto / Project
+slug: proyecto
 ---

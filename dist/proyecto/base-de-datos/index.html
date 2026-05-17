@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Portfolio"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.6"><title>Relational Database / Base de Datos Relacional</title><script>
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.setAttribute("lang", savedLang);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${savedLang}`);
+            if (text) el.textContent = text;
+        });
+    });
+</script><link rel="stylesheet" href="/_astro/_slug_.UfwbQBmG.css">
+<style>.back-button[data-astro-cid-fzx4jmue]{display:inline-block;padding:.8rem 1.6rem;border-radius:8px;background:var(--color-primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s ease}.back-button[data-astro-cid-fzx4jmue]:hover{opacity:.85}
+</style></head> <body class="site-wrapper"> <header class="site-head"> <div class="site-head-container"> <a class="nav-burger" href="#"> <div class="hamburger hamburger--collapse"> <div class="hamburger-box"> <div class="hamburger-inner"></div> </div> </div> </a> <nav class="site-head-left"> <ul class="nav"> <li> <a href="/" data-en="Home" data-es="Inicio">Home</a> </li> <li> <a href="/bio/" data-en="About" data-es="Sobre mí">About</a> </li> <li> <a href="/work/" data-en="Work" data-es="Proyectos">Work</a> </li> <li> <a href="/contact/" data-en="Contact" data-es="Contacto">Contact</a> </li> <li> <a href="/evidencias/" data-en="Evidence" data-es="Evidencias">Evidence</a> </li> </ul> </nav> <div class="site-head-center"> <a class="site-head-logo" href="/"> Relational Database / Base de Datos Relacional </a> </div> <div class="site-head-right"> <div class="social-links"> <button id="lang-toggle" class="lang-toggle"> <span id="lang-text">EN</span> </button> </div> </div> </div> </header> <main id="site-main" class="site-main"> <article class="post-content" data-astro-cid-fzx4jmue><h1 class="page-head-title" data-astro-cid-fzx4jmue>Relational Database / Base de Datos Relacional</h1><p class="evidence-desc" style="text-align:center; margin-bottom:2rem;" data-astro-cid-fzx4jmue>PostgreSQL schema with 12 entities, functions, triggers, stored procedures and views.</p><div class="post-content-body" data-astro-cid-fzx4jmue><h2 id="contexto">Contexto</h2>
+<p>Base de datos diseñada en PostgreSQL para gestionar la plataforma de paseadores de perros. El modelo cubre el ciclo completo del servicio: desde el registro de usuarios hasta la calificación mutua al finalizar un paseo.</p>
+<hr>
+<h2 id="entidades-del-sistema">Entidades del Sistema</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Entidad</th><th>Descripción</th></tr></thead><tbody><tr><td><code>rol</code></td><td>Catálogo de roles: ADMIN, USUARIO, PASEADOR</td></tr><tr><td><code>usuario</code></td><td>Entidad central con reputación automática</td></tr><tr><td><code>usuario_rol</code></td><td>Relación N:M entre usuario y rol</td></tr><tr><td><code>paseador</code></td><td>Extiende usuario (1:1), agrega disponibilidad</td></tr><tr><td><code>dueno</code></td><td>Extiende usuario (1:1), vinculado a dirección</td></tr><tr><td><code>direccion</code></td><td>Dirección con coordenadas GPS</td></tr><tr><td><code>perro</code></td><td>Mascota del dueño con validaciones de edad y peso</td></tr><tr><td><code>disponibilidad</code></td><td>Franjas horarias del paseador por día</td></tr><tr><td><code>solicitud</code></td><td>Pedido de paseo con estados controlados</td></tr><tr><td><code>paseo</code></td><td>Servicio confirmado con precio, distancia y ruta</td></tr><tr><td><code>paseo_perro</code></td><td>N:M entre paseo y perro (máximo 5)</td></tr><tr><td><code>calificacion</code></td><td>Evaluación mutua solo al finalizar el paseo</td></tr></tbody></table>
+<hr>
+<h2 id="creación-de-tablas">Creación de Tablas</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TABLE</span><span style="color:#B392F0"> usuario</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_usuario </span><span style="color:#F97583">BIGSERIAL</span><span style="color:#F97583"> PRIMARY KEY</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    correo </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">UNIQUE</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contrasena </span><span style="color:#F97583">TEXT</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    telefono </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    primer_nombre </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    segundo_nombre </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    primer_apellido </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    segundo_apellido </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    foto_perfil </span><span style="color:#F97583">TEXT</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    reputacion </span><span style="color:#F97583">NUMERIC</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">DEFAULT</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    activo </span><span style="color:#F97583">BOOLEAN</span><span style="color:#F97583"> DEFAULT</span><span style="color:#E1E4E8"> TRUE,</span></span>
+<span class="line"><span style="color:#E1E4E8">    created_at </span><span style="color:#F97583">TIMESTAMP</span><span style="color:#F97583"> DEFAULT</span><span style="color:#E1E4E8"> CURRENT_TIMESTAMP,</span></span>
+<span class="line"><span style="color:#E1E4E8">    updated_at </span><span style="color:#F97583">TIMESTAMP</span><span style="color:#F97583"> DEFAULT</span><span style="color:#E1E4E8"> CURRENT_TIMESTAMP</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TABLE</span><span style="color:#B392F0"> paseo</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_paseo </span><span style="color:#F97583">BIGSERIAL</span><span style="color:#F97583"> PRIMARY KEY</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    estado estado_paseo </span><span style="color:#F97583">DEFAULT</span><span style="color:#9ECBFF"> 'SOLICITADO'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    fecha_inicio </span><span style="color:#F97583">TIMESTAMP</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    fecha_fin </span><span style="color:#F97583">TIMESTAMP</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    precio </span><span style="color:#F97583">NUMERIC</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">CHECK</span><span style="color:#E1E4E8"> (precio </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    distancia_km </span><span style="color:#F97583">NUMERIC</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    ruta </span><span style="color:#F97583">TEXT</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_solicitud </span><span style="color:#F97583">BIGINT</span><span style="color:#F97583"> UNIQUE</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_paseador </span><span style="color:#F97583">BIGINT</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    FOREIGN KEY</span><span style="color:#E1E4E8">(id_solicitud) </span><span style="color:#F97583">REFERENCES</span><span style="color:#E1E4E8"> solicitud(id_solicitud),</span></span>
+<span class="line"><span style="color:#F97583">    FOREIGN KEY</span><span style="color:#E1E4E8">(id_paseador) </span><span style="color:#F97583">REFERENCES</span><span style="color:#E1E4E8"> paseador(id_usuario)</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TABLE</span><span style="color:#B392F0"> calificacion</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_calificacion </span><span style="color:#F97583">BIGSERIAL</span><span style="color:#F97583"> PRIMARY KEY</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    puntaje puntuacion </span><span style="color:#F97583">NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    comentario </span><span style="color:#F97583">TEXT</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    fecha </span><span style="color:#F97583">TIMESTAMP</span><span style="color:#F97583"> DEFAULT</span><span style="color:#E1E4E8"> CURRENT_TIMESTAMP,</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_paseo </span><span style="color:#F97583">BIGINT</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_emisor </span><span style="color:#F97583">BIGINT</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    id_receptor </span><span style="color:#F97583">BIGINT</span><span style="color:#F97583"> NOT NULL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    FOREIGN KEY</span><span style="color:#E1E4E8">(id_paseo) </span><span style="color:#F97583">REFERENCES</span><span style="color:#E1E4E8"> paseo(id_paseo) </span><span style="color:#F97583">ON DELETE CASCADE</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    FOREIGN KEY</span><span style="color:#E1E4E8">(id_emisor) </span><span style="color:#F97583">REFERENCES</span><span style="color:#E1E4E8"> usuario(id_usuario),</span></span>
+<span class="line"><span style="color:#F97583">    FOREIGN KEY</span><span style="color:#E1E4E8">(id_receptor) </span><span style="color:#F97583">REFERENCES</span><span style="color:#E1E4E8"> usuario(id_usuario)</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span></code></pre>
+<hr>
+<h2 id="dominios-personalizados">Dominios Personalizados</h2>
+<p>En lugar de tablas de catálogo separadas, se usaron dominios PostgreSQL para garantizar valores controlados:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> DOMAIN</span><span style="color:#B392F0"> estado_paseo</span><span style="color:#F97583"> AS</span><span style="color:#F97583"> VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    CHECK</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">VALUE</span><span style="color:#F97583"> IN</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">'SOLICITADO'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'ACEPTADO'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'EN_CURSO'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'FINALIZADO'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'CANCELADO'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> DOMAIN</span><span style="color:#B392F0"> estado_solicitud</span><span style="color:#F97583"> AS</span><span style="color:#F97583"> VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    CHECK</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">VALUE</span><span style="color:#F97583"> IN</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">'PENDIENTE'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'ACEPTADA'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'RECHAZADA'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'CANCELADA'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> DOMAIN</span><span style="color:#B392F0"> puntuacion</span><span style="color:#F97583"> AS</span><span style="color:#F97583"> NUMERIC</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    CHECK</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">VALUE</span><span style="color:#F97583"> >=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> AND</span><span style="color:#F97583"> VALUE</span><span style="color:#F97583"> &#x3C;=</span><span style="color:#79B8FF"> 5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> DOMAIN</span><span style="color:#B392F0"> dia_semana</span><span style="color:#F97583"> AS</span><span style="color:#F97583"> VARCHAR</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    CHECK</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">VALUE</span><span style="color:#F97583"> IN</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">'LUNES'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'MARTES'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'MIERCOLES'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'JUEVES'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'VIERNES'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'SABADO'</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF">'DOMINGO'</span><span style="color:#E1E4E8">));</span></span></code></pre>
+<hr>
+<h2 id="funciones">Funciones</h2>
+<h3 id="fn_registrar_usuario--registro-con-roles">fn_registrar_usuario — Registro con roles</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE OR REPLACE</span><span style="color:#F97583"> FUNCTION</span><span style="color:#B392F0"> fn_registrar_usuario</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    p_correo </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">, p_contrasena </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">, p_telefono </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    p_primer_nombre </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">, p_segundo_nombre </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    p_primer_apellido </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">, p_segundo_apellido </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    p_foto_perfil </span><span style="color:#F97583">VARCHAR</span><span style="color:#E1E4E8">, p_roles </span><span style="color:#F97583">BIGINT</span><span style="color:#E1E4E8">[]</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">RETURNS</span><span style="color:#E1E4E8"> SETOF usuario </span><span style="color:#F97583">LANGUAGE</span><span style="color:#E1E4E8"> plpgsql </span><span style="color:#F97583">AS</span></span>
+<span class="line"><span style="color:#E1E4E8">$$</span></span>
+<span class="line"><span style="color:#F97583">DECLARE</span></span>
+<span class="line"><span style="color:#E1E4E8">    v_id_usuario </span><span style="color:#F97583">BIGINT</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    v_rol_id </span><span style="color:#F97583">BIGINT</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">BEGIN</span></span>
+<span class="line"><span style="color:#F97583">    IF</span><span style="color:#F97583"> EXISTS</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">SELECT</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> FROM</span><span style="color:#E1E4E8"> usuario </span><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> correo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p_correo) </span><span style="color:#F97583">THEN</span></span>
+<span class="line"><span style="color:#E1E4E8">        RAISE EXCEPTION </span><span style="color:#9ECBFF">'El correo ya está registrado'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    END</span><span style="color:#F97583"> IF</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    INSERT INTO</span><span style="color:#E1E4E8"> usuario(correo, contrasena, telefono, primer_nombre,</span></span>
+<span class="line"><span style="color:#E1E4E8">        segundo_nombre, primer_apellido, segundo_apellido, foto_perfil,</span></span>
+<span class="line"><span style="color:#E1E4E8">        reputacion, activo, created_at, updated_at)</span></span>
+<span class="line"><span style="color:#F97583">    VALUES</span><span style="color:#E1E4E8">(p_correo, p_contrasena, p_telefono, p_primer_nombre,</span></span>
+<span class="line"><span style="color:#E1E4E8">        p_segundo_nombre, p_primer_apellido, p_segundo_apellido,</span></span>
+<span class="line"><span style="color:#E1E4E8">        p_foto_perfil, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, true, </span><span style="color:#F97583">NOW</span><span style="color:#E1E4E8">(), </span><span style="color:#F97583">NOW</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">    RETURNING id_usuario </span><span style="color:#F97583">INTO</span><span style="color:#E1E4E8"> v_id_usuario;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    IF</span><span style="color:#E1E4E8"> p_roles </span><span style="color:#F97583">IS NOT NULL</span><span style="color:#F97583"> THEN</span></span>
+<span class="line"><span style="color:#E1E4E8">        FOREACH v_rol_id </span><span style="color:#F97583">IN</span><span style="color:#F97583"> ARRAY</span><span style="color:#E1E4E8"> p_roles </span><span style="color:#F97583">LOOP</span></span>
+<span class="line"><span style="color:#F97583">            INSERT INTO</span><span style="color:#E1E4E8"> usuario_rol(id_usuario, id_rol)</span></span>
+<span class="line"><span style="color:#F97583">            VALUES</span><span style="color:#E1E4E8">(v_id_usuario, v_rol_id);</span></span>
+<span class="line"><span style="color:#F97583">        END</span><span style="color:#F97583"> LOOP</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    END</span><span style="color:#F97583"> IF</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    RETURN</span><span style="color:#E1E4E8"> QUERY </span><span style="color:#F97583">SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> FROM</span><span style="color:#E1E4E8"> usuario </span><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> id_usuario </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> v_id_usuario;</span></span>
+<span class="line"><span style="color:#F97583">END</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">$$;</span></span></code></pre>
+<h3 id="fn_validar_max_perros--límite-de-5-perros-por-paseo">fn_validar_max_perros — Límite de 5 perros por paseo</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE OR REPLACE</span><span style="color:#F97583"> FUNCTION</span><span style="color:#B392F0"> fn_validar_max_perros</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">RETURNS</span><span style="color:#E1E4E8"> TRIGGER </span><span style="color:#F97583">LANGUAGE</span><span style="color:#E1E4E8"> plpgsql </span><span style="color:#F97583">AS</span></span>
+<span class="line"><span style="color:#E1E4E8">$$</span></span>
+<span class="line"><span style="color:#F97583">DECLARE</span></span>
+<span class="line"><span style="color:#E1E4E8">    cantidad </span><span style="color:#F97583">INTEGER</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">BEGIN</span></span>
+<span class="line"><span style="color:#F97583">    SELECT</span><span style="color:#79B8FF"> COUNT</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">INTO</span><span style="color:#E1E4E8"> cantidad</span></span>
+<span class="line"><span style="color:#F97583">    FROM</span><span style="color:#E1E4E8"> paseo_perro </span><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> id_paseo </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> NEW</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_paseo</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    IF</span><span style="color:#E1E4E8"> cantidad </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 5</span><span style="color:#F97583"> THEN</span></span>
+<span class="line"><span style="color:#E1E4E8">        RAISE EXCEPTION </span><span style="color:#9ECBFF">'Máximo 5 perros por paseo'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    END</span><span style="color:#F97583"> IF</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    RETURN</span><span style="color:#E1E4E8"> NEW;</span></span>
+<span class="line"><span style="color:#F97583">END</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">$$;</span></span></code></pre>
+<hr>
+<h2 id="procedimientos-almacenados">Procedimientos Almacenados</h2>
+<h3 id="sp_aceptar_solicitud--acepta-solicitud-y-crea-el-paseo">sp_aceptar_solicitud — Acepta solicitud y crea el paseo</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> OR</span><span style="color:#F97583"> REPLACE</span><span style="color:#F97583"> PROCEDURE</span><span style="color:#E1E4E8"> sp_aceptar_solicitud(p_solicitud </span><span style="color:#F97583">BIGINT</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">LANGUAGE</span><span style="color:#E1E4E8"> plpgsql </span><span style="color:#F97583">AS</span></span>
+<span class="line"><span style="color:#E1E4E8">$$</span></span>
+<span class="line"><span style="color:#F97583">DECLARE</span></span>
+<span class="line"><span style="color:#E1E4E8">    v_paseador </span><span style="color:#F97583">BIGINT</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">BEGIN</span></span>
+<span class="line"><span style="color:#F97583">    UPDATE</span><span style="color:#E1E4E8"> solicitud </span><span style="color:#F97583">SET</span><span style="color:#E1E4E8"> estado </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'ACEPTADA'</span></span>
+<span class="line"><span style="color:#F97583">    WHERE</span><span style="color:#E1E4E8"> id_solicitud </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p_solicitud;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    SELECT</span><span style="color:#E1E4E8"> id_paseador </span><span style="color:#F97583">INTO</span><span style="color:#E1E4E8"> v_paseador</span></span>
+<span class="line"><span style="color:#F97583">    FROM</span><span style="color:#E1E4E8"> solicitud </span><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> id_solicitud </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p_solicitud;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    INSERT INTO</span><span style="color:#E1E4E8"> paseo(estado, id_solicitud, id_paseador)</span></span>
+<span class="line"><span style="color:#F97583">    VALUES</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ACEPTADO'</span><span style="color:#E1E4E8">, p_solicitud, v_paseador);</span></span>
+<span class="line"><span style="color:#F97583">END</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">$$;</span></span></code></pre>
+<hr>
+<h2 id="triggers">Triggers</h2>
+<h3 id="trg_validar_paseo_activo--impide-dos-paseos-simultáneos">trg_validar_paseo_activo — Impide dos paseos simultáneos</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TRIGGER</span><span style="color:#B392F0"> trg_validar_paseo_activo</span></span>
+<span class="line"><span style="color:#F97583">BEFORE</span><span style="color:#F97583"> INSERT</span><span style="color:#F97583"> OR</span><span style="color:#F97583"> UPDATE</span><span style="color:#F97583"> ON</span><span style="color:#E1E4E8"> paseo</span></span>
+<span class="line"><span style="color:#F97583">FOR</span><span style="color:#E1E4E8"> EACH </span><span style="color:#F97583">ROW</span></span>
+<span class="line"><span style="color:#F97583">WHEN</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">NEW</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">estado</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> 'EN_CURSO'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">EXECUTE</span><span style="color:#F97583"> FUNCTION</span><span style="color:#E1E4E8"> fn_validar_paseo_activo();</span></span></code></pre>
+<h3 id="trg_actualizar_reputacion--recalcula-reputación-tras-calificación">trg_actualizar_reputacion — Recalcula reputación tras calificación</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TRIGGER</span><span style="color:#B392F0"> trg_actualizar_reputacion</span></span>
+<span class="line"><span style="color:#F97583">AFTER</span><span style="color:#F97583"> INSERT</span><span style="color:#F97583"> ON</span><span style="color:#E1E4E8"> calificacion</span></span>
+<span class="line"><span style="color:#F97583">FOR</span><span style="color:#E1E4E8"> EACH </span><span style="color:#F97583">ROW</span></span>
+<span class="line"><span style="color:#F97583">EXECUTE</span><span style="color:#F97583"> FUNCTION</span><span style="color:#E1E4E8"> fn_actualizar_reputacion();</span></span></code></pre>
+<p><strong>Por qué triggers:</strong> la reputación y las restricciones de negocio se aplican de forma transparente en la capa de datos, sin depender de la aplicación. Así aunque se inserte directamente en la base, las reglas siempre se cumplen.</p>
+<hr>
+<h2 id="vistas">Vistas</h2>
+<h3 id="vw_historial_paseos">vw_historial_paseos</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE OR REPLACE</span><span style="color:#F97583"> VIEW</span><span style="color:#B392F0"> vw_historial_paseos</span><span style="color:#F97583"> AS</span></span>
+<span class="line"><span style="color:#F97583">SELECT</span></span>
+<span class="line"><span style="color:#79B8FF">    p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_paseo</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">estado</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">fecha_inicio</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">fecha_fin</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">precio</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    u_dueno</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">primer_nombre</span><span style="color:#F97583"> ||</span><span style="color:#9ECBFF"> ' '</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> u_dueno</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">primer_apellido</span><span style="color:#F97583"> AS</span><span style="color:#E1E4E8"> dueno,</span></span>
+<span class="line"><span style="color:#79B8FF">    u_paseador</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">primer_nombre</span><span style="color:#F97583"> ||</span><span style="color:#9ECBFF"> ' '</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> u_paseador</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">primer_apellido</span><span style="color:#F97583"> AS</span><span style="color:#E1E4E8"> paseador</span></span>
+<span class="line"><span style="color:#F97583">FROM</span><span style="color:#E1E4E8"> paseo p</span></span>
+<span class="line"><span style="color:#F97583">INNER JOIN</span><span style="color:#E1E4E8"> solicitud s </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> s</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_solicitud</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_solicitud</span></span>
+<span class="line"><span style="color:#F97583">INNER JOIN</span><span style="color:#E1E4E8"> dueno d </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> d</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> s</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_dueno</span></span>
+<span class="line"><span style="color:#F97583">INNER JOIN</span><span style="color:#E1E4E8"> usuario u_dueno </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> u_dueno</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> d</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span></span>
+<span class="line"><span style="color:#F97583">INNER JOIN</span><span style="color:#E1E4E8"> paseador pa </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> pa</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_paseador</span></span>
+<span class="line"><span style="color:#F97583">INNER JOIN</span><span style="color:#E1E4E8"> usuario u_paseador </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> u_paseador</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> pa</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<h3 id="mv_ranking_paseadores--vista-materializada">mv_ranking_paseadores — Vista materializada</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#E1E4E8"> MATERIALIZED VIEW mv_ranking_paseadores </span><span style="color:#F97583">AS</span></span>
+<span class="line"><span style="color:#F97583">SELECT</span></span>
+<span class="line"><span style="color:#79B8FF">    p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    u</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">primer_nombre</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    ROUND</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">AVG</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">c</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">puntaje</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">AS</span><span style="color:#E1E4E8"> reputacion</span></span>
+<span class="line"><span style="color:#F97583">FROM</span><span style="color:#E1E4E8"> paseador p</span></span>
+<span class="line"><span style="color:#F97583">INNER JOIN</span><span style="color:#E1E4E8"> usuario u </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> u</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span></span>
+<span class="line"><span style="color:#F97583">LEFT JOIN</span><span style="color:#E1E4E8"> calificacion c </span><span style="color:#F97583">ON</span><span style="color:#79B8FF"> c</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_receptor</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span></span>
+<span class="line"><span style="color:#F97583">GROUP BY</span><span style="color:#79B8FF"> p</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">id_usuario</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">u</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">primer_nombre</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p>La vista materializada permite consultar el ranking de paseadores con alto rendimiento sin recalcular el promedio en cada consulta.</p>
+<hr>
+<h2 id="aprendizaje">Aprendizaje</h2>
+<p>Este proyecto integró todos los conceptos del curso en un sistema real. Lo más valioso fue entender cómo los triggers y funciones en la capa de base de datos garantizan las reglas de negocio independientemente de la aplicación que las consuma. La vista materializada fue una decisión de diseño consciente: el ranking de paseadores se consulta frecuentemente pero se actualiza poco, haciéndola ideal para materialización.</p></div><div style="text-align:center; margin-top:3rem;" data-astro-cid-fzx4jmue><a href="/proyecto/" class="back-button" data-astro-cid-fzx4jmue>← Back to Project</a></div></article> </main> <footer class="site-foot"> <div>&copy; 2026 <a href="/">Clay</a></div> <div>
+Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> |
+        Licensed under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a> </div> </footer> <script type="module">function a(e){document.documentElement.setAttribute("lang",e),localStorage.setItem("lang",e),document.querySelectorAll("[data-en]").forEach(o=>{const c=o.getAttribute(`data-${e}`);c&&(o.textContent=c)});const n=document.getElementById("lang-text");n&&(n.textContent=e==="en"?"ES":"EN")}function r(){const e=localStorage.getItem("lang")||"en";a(e);const t=document.getElementById("lang-toggle");t&&(t.onclick=()=>{const o=(document.documentElement.getAttribute("lang")||"en")==="en"?"es":"en";a(o)})}function u(){const e=document.querySelector(".nav-burger"),t=document.querySelector(".site-wrapper");e&&t&&(e.onclick=n=>{n.preventDefault(),t.classList.toggle("site-head-open")})}function l(){u(),r()}document.addEventListener("DOMContentLoaded",l);document.addEventListener("astro:page-load",l);</script> </body> </html>

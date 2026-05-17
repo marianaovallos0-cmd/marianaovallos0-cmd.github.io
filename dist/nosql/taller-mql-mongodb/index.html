@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Portfolio"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.6"><title>Workshop — MQL MongoDB / Taller — MQL MongoDB</title><script>
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.setAttribute("lang", savedLang);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${savedLang}`);
+            if (text) el.textContent = text;
+        });
+    });
+</script><link rel="stylesheet" href="/_astro/_slug_.UfwbQBmG.css">
+<style>.back-button[data-astro-cid-fzx4jmue]{display:inline-block;padding:.8rem 1.6rem;border-radius:8px;background:var(--color-primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s ease}.back-button[data-astro-cid-fzx4jmue]:hover{opacity:.85}
+</style></head> <body class="site-wrapper"> <header class="site-head"> <div class="site-head-container"> <a class="nav-burger" href="#"> <div class="hamburger hamburger--collapse"> <div class="hamburger-box"> <div class="hamburger-inner"></div> </div> </div> </a> <nav class="site-head-left"> <ul class="nav"> <li> <a href="/" data-en="Home" data-es="Inicio">Home</a> </li> <li> <a href="/bio/" data-en="About" data-es="Sobre mí">About</a> </li> <li> <a href="/work/" data-en="Work" data-es="Proyectos">Work</a> </li> <li> <a href="/contact/" data-en="Contact" data-es="Contacto">Contact</a> </li> <li> <a href="/evidencias/" data-en="Evidence" data-es="Evidencias">Evidence</a> </li> </ul> </nav> <div class="site-head-center"> <a class="site-head-logo" href="/"> Workshop — MQL MongoDB / Taller — MQL MongoDB </a> </div> <div class="site-head-right"> <div class="social-links"> <button id="lang-toggle" class="lang-toggle"> <span id="lang-text">EN</span> </button> </div> </div> </div> </header> <main id="site-main" class="site-main"> <article class="post-content" data-astro-cid-fzx4jmue><h1 class="page-head-title" data-astro-cid-fzx4jmue>Workshop — MQL MongoDB / Taller — MQL MongoDB</h1><p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;" data-astro-cid-fzx4jmue>
+Autor: Mariana Ovallos Romero, Daniel Rodriguez</p><p class="evidence-desc" style="text-align:center; margin-bottom:2rem;" data-astro-cid-fzx4jmue>30 exercises on CRUD operations, aggregation pipelines and advanced operators over sample_airbnb.</p><div class="post-content-body" data-astro-cid-fzx4jmue><h2 id="contexto">Contexto</h2>
+<p>Taller de MQL (MongoDB Query Language) desarrollado sobre la base de datos <code>sample_airbnb</code>. El objetivo fue consolidar operaciones CRUD, consultas con filtros y proyecciones, y pipelines de agregación. Docente: Christian Felipe Duarte Arévalo.</p>
+<hr>
+<h2 id="operaciones-de-inserción">Operaciones de Inserción</h2>
+<p><strong>Ejercicio 1 — insertOne básico</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">use</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"sample_airbnb"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">insertOne</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">"Littel Cabin retreat"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  summary: </span><span style="color:#9ECBFF">"Pequeña cabaña acogedora y agradable"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  property_type: </span><span style="color:#9ECBFF">"Cabin"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  price: </span><span style="color:#B392F0">NumberDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'150.00'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<p><strong>Ejercicio 2 — insertOne con objeto anidado</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">use</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"sample_airbnb"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">insertOne</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">"Departamento en el centro"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  property_type: </span><span style="color:#9ECBFF">"Apartment"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  price: </span><span style="color:#B392F0">NumberDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'95.00'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">  address: {</span></span>
+<span class="line"><span style="color:#E1E4E8">    country: </span><span style="color:#9ECBFF">"Colombia"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    market: </span><span style="color:#9ECBFF">"Bogotá"</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  amenities: [</span><span style="color:#9ECBFF">"Wifi"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Kitchen"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<p>Para acceder a campos anidados en consultas se usa notación de punto entre comillas: <code>"address.country"</code>.</p>
+<p><strong>Ejercicio 3 — insertMany</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">use</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"sample_airbnb"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">insertMany</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#9ECBFF">"Studio calle 76"</span><span style="color:#E1E4E8">, price: </span><span style="color:#B392F0">NumberDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"80.00"</span><span style="color:#E1E4E8">) },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#9ECBFF">"Casa minimalista"</span><span style="color:#E1E4E8">, price: </span><span style="color:#B392F0">NumberDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"70.00"</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span></code></pre>
+<p><strong>Ejercicio 5 — Validación de unicidad del _id</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">insertOne</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  _id: </span><span style="color:#B392F0">ObjectId</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"6a02854ce5ff92ec173a1791"</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">"Caso duplicado"</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span>
+<span class="line"><span style="color:#6A737D">// Error: E11000 duplicate key error</span></span></code></pre>
+<p>MongoDB obliga a que el <code>_id</code> sea único en cada colección. Intentar insertar un documento con un <code>_id</code> ya existente genera el error <code>E11000 duplicate key error</code>.</p>
+<hr>
+<h2 id="consultas-con-find">Consultas con find</h2>
+<p><strong>Ejercicio 6 — Filtro por país con proyección</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { </span><span style="color:#9ECBFF">"address.country"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Brazil"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, price: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, _id: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Ejercicio 7 — Mayor que ($gt)</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { beds: { $gt: </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8"> } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, number_of_reviews: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, _id: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Ejercicio 9 — $and con objeto anidado</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $and: [</span></span>
+<span class="line"><span style="color:#E1E4E8">    { property_type: </span><span style="color:#9ECBFF">"Apartment"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"address.market"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"New York"</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">  ]},</span></span>
+<span class="line"><span style="color:#E1E4E8">  { property_type: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"address.market"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Ejercicio 10 — $in</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { property_type: { $in: [</span><span style="color:#9ECBFF">"House"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Condominium"</span><span style="color:#E1E4E8">] } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { property_type: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Ejercicio 11 — Regex sin distinción de mayúsculas</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: { $regex: </span><span style="color:#9ECBFF">"^Luxury"</span><span style="color:#E1E4E8">, $options: </span><span style="color:#9ECBFF">"i"</span><span style="color:#E1E4E8"> } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Ejercicio 13 — $size exacto en array</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { amenities: { $size: </span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8"> } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, amenities: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><code>$size</code> no se puede combinar con operadores de comparación; solo acepta igualdad exacta.</p>
+<p><strong>Ejercicio 14 — sort + limit</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  {},</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, price: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"address.country"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, _id: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">).</span><span style="color:#B392F0">sort</span><span style="color:#E1E4E8">({ price: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> }).</span><span style="color:#B392F0">limit</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<hr>
+<h2 id="operaciones-de-actualización">Operaciones de Actualización</h2>
+<p><strong>Ejercicio 17 — $set + $push simultáneo</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">updateOne</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#9ECBFF">"Copacabana Apartment Posto 6"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">  {</span></span>
+<span class="line"><span style="color:#E1E4E8">    $set: { property_type: </span><span style="color:#9ECBFF">"Casa gigante"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">    $push: { amenities: </span><span style="color:#9ECBFF">"Smart Tv"</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Ejercicio 18 — $inc en updateMany</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">updateMany</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { </span><span style="color:#9ECBFF">"address.country"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Spain"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $inc: { number_of_reviews: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">// matchedCount: 633, modifiedCount: 633</span></span></code></pre>
+<p><strong>Ejercicio 19 — $pull en updateMany</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">updateMany</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { amenities: </span><span style="color:#9ECBFF">"Cable TV"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $pull: { amenities: </span><span style="color:#9ECBFF">"Cable TV"</span><span style="color:#E1E4E8"> } }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">// matchedCount: 1735, modifiedCount: 1735</span></span></code></pre>
+<p><strong>Ejercicio 20 — upsert: true</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">updateOne</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  { name: </span><span style="color:#9ECBFF">"Apartamentico nuevo"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $set: { price: </span><span style="color:#B392F0">NumberDecimal</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"1500.00"</span><span style="color:#E1E4E8">), </span><span style="color:#9ECBFF">"address.country"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"United States"</span><span style="color:#E1E4E8"> } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { upsert: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">// upsertedCount: 1 — no existía, se creó automáticamente</span></span></code></pre>
+<hr>
+<h2 id="pipelines-de-agregación">Pipelines de Agregación</h2>
+<p><strong>Ejercicio 22 — Precio promedio por país</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">aggregate</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $group: { _id: </span><span style="color:#9ECBFF">"$address.country"</span><span style="color:#E1E4E8">, avg_precio: { $avg: </span><span style="color:#9ECBFF">"$price"</span><span style="color:#E1E4E8"> } } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $sort: { avg_precio: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } }</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span></code></pre>
+<p>Hong Kong lidera con el promedio más alto, seguido por Brasil y China.</p>
+<p><strong>Ejercicio 23 — Top 5 amenities más comunes</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">aggregate</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $unwind: </span><span style="color:#9ECBFF">"$amenities"</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $group: { _id: </span><span style="color:#9ECBFF">"$amenities"</span><span style="color:#E1E4E8">, frecuency: { $sum: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $sort: { frecuency: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $limit: </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#6A737D">// Resultado: Wifi (5304), Essentials (5048), Kitchen (4952), TV (4295), Hangers (4226)</span></span></code></pre>
+<p><code>$unwind</code> descompone el array <code>amenities</code> en documentos individuales; sin él no se podría contar por elemento.</p>
+<p><strong>Ejercicio 27 — $bucket para rangos de precio</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">aggregate</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $bucket: {</span></span>
+<span class="line"><span style="color:#E1E4E8">    groupBy: </span><span style="color:#9ECBFF">"$price"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    boundaries: [</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">101</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">301</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1001</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">    default: </span><span style="color:#9ECBFF">"1000+"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    output: { cantidad: { $sum: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }}</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span></code></pre>
+<p><code>$bucket</code> requiere límites exactos y que todos los documentos caigan dentro de algún rango o del <code>default</code>. El tipado <code>Decimal128</code> del campo <code>price</code> puede causar problemas con operadores numéricos estándar.</p>
+<p><strong>Ejercicio 30 — Análisis por año de última review</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">db.listingsAndReviews.</span><span style="color:#B392F0">aggregate</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $match: { last_review: { $exists: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">, $ne: </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8"> } } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $group: { _id: { año: { $year: </span><span style="color:#9ECBFF">"$last_review"</span><span style="color:#E1E4E8"> } }, total: { $sum: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } } },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { $sort: { </span><span style="color:#9ECBFF">"_id.año"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> } }</span></span>
+<span class="line"><span style="color:#E1E4E8">])</span></span></code></pre>
+<hr>
+<h2 id="dificultades-encontradas">Dificultades encontradas</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Situación</th><th>Solución</th></tr></thead><tbody><tr><td>Campos ausentes en algunos documentos</td><td>Usar <code>$exists</code> para filtrar antes de operar</td></tr><tr><td><code>$size</code> no acepta operadores de comparación</td><td>Solo funciona con igualdad exacta</td></tr><tr><td><code>price</code> usa <code>Decimal128</code> en vez de Number</td><td>Precaución en operaciones aritméticas y conversiones con <code>$toInt</code></td></tr><tr><td><code>$unwind</code> duplica documentos</td><td>Esperado: es su función; se agrupa después</td></tr><tr><td><code>$bucket</code> requiere límites precisos</td><td>Definir <code>default</code> para valores fuera de rango</td></tr><tr><td>Diferencia entre <code>find()</code> y <code>aggregate()</code></td><td>Para pipelines múltiples, siempre <code>aggregate()</code></td></tr></tbody></table>
+<hr>
+<h2 id="aprendizaje">Aprendizaje</h2>
+<p>La diferencia fundamental entre SQL y MongoDB no es solo de sintaxis sino de modelo mental: en MongoDB los datos pueden estar anidados dentro del mismo documento, lo que elimina JOINs pero requiere conocer operadores como <code>$unwind</code> para trabajar con arrays. El pipeline de agregación es secuencial — cada etapa recibe la salida de la anterior — lo que obliga a pensar en el orden correcto de <code>$match</code> (primero, para reducir documentos) antes de <code>$group</code> o <code>$unwind</code>. El uso de <code>upsert: true</code> fue especialmente útil para operaciones donde no se sabe si el documento ya existe.</p></div><div style="text-align:center; margin-top:3rem;" data-astro-cid-fzx4jmue><a href="/nosql/" class="back-button" data-astro-cid-fzx4jmue>← Back to NoSQL</a></div></article> </main> <footer class="site-foot"> <div>&copy; 2026 <a href="/">Clay</a></div> <div>
+Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> |
+        Licensed under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a> </div> </footer> <script type="module">function a(e){document.documentElement.setAttribute("lang",e),localStorage.setItem("lang",e),document.querySelectorAll("[data-en]").forEach(o=>{const c=o.getAttribute(`data-${e}`);c&&(o.textContent=c)});const n=document.getElementById("lang-text");n&&(n.textContent=e==="en"?"ES":"EN")}function r(){const e=localStorage.getItem("lang")||"en";a(e);const t=document.getElementById("lang-toggle");t&&(t.onclick=()=>{const o=(document.documentElement.getAttribute("lang")||"en")==="en"?"es":"en";a(o)})}function u(){const e=document.querySelector(".nav-burger"),t=document.querySelector(".site-wrapper");e&&t&&(e.onclick=n=>{n.preventDefault(),t.classList.toggle("site-head-open")})}function l(){u(),r()}document.addEventListener("DOMContentLoaded",l);document.addEventListener("astro:page-load",l);</script> </body> </html>

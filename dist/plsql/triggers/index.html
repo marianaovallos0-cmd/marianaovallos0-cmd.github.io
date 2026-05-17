@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Portfolio"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.6"><title>Triggers / Triggers</title><script>
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.setAttribute("lang", savedLang);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${savedLang}`);
+            if (text) el.textContent = text;
+        });
+    });
+</script><link rel="stylesheet" href="/_astro/_slug_.UfwbQBmG.css">
+<style>.back-button[data-astro-cid-fzx4jmue]{display:inline-block;padding:.8rem 1.6rem;border-radius:8px;background:var(--color-primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s ease}.back-button[data-astro-cid-fzx4jmue]:hover{opacity:.85}
+</style></head> <body class="site-wrapper"> <header class="site-head"> <div class="site-head-container"> <a class="nav-burger" href="#"> <div class="hamburger hamburger--collapse"> <div class="hamburger-box"> <div class="hamburger-inner"></div> </div> </div> </a> <nav class="site-head-left"> <ul class="nav"> <li> <a href="/" data-en="Home" data-es="Inicio">Home</a> </li> <li> <a href="/bio/" data-en="About" data-es="Sobre mí">About</a> </li> <li> <a href="/work/" data-en="Work" data-es="Proyectos">Work</a> </li> <li> <a href="/contact/" data-en="Contact" data-es="Contacto">Contact</a> </li> <li> <a href="/evidencias/" data-en="Evidence" data-es="Evidencias">Evidence</a> </li> </ul> </nav> <div class="site-head-center"> <a class="site-head-logo" href="/"> Triggers / Triggers </a> </div> <div class="site-head-right"> <div class="social-links"> <button id="lang-toggle" class="lang-toggle"> <span id="lang-text">EN</span> </button> </div> </div> </div> </header> <main id="site-main" class="site-main"> <article class="post-content" data-astro-cid-fzx4jmue><h1 class="page-head-title" data-astro-cid-fzx4jmue>Triggers / Triggers</h1><p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;" data-astro-cid-fzx4jmue>
+Autor: _____</p><p class="evidence-desc" style="text-align:center; margin-bottom:2rem;" data-astro-cid-fzx4jmue>Salary audit trigger for employees in department 80.</p><div class="post-content-body" data-astro-cid-fzx4jmue><h2 id="contexto">Contexto</h2>
+<p>Se creó un trigger que registra automáticamente en una tabla de auditoría cada vez que se actualiza el salario de un empleado perteneciente al <strong>departamento 80</strong> (ventas). Primero se creó la copia de la tabla de empleados sobre la que opera el trigger.</p>
+<hr>
+<h2 id="creación-de-la-tabla-base">Creación de la Tabla Base</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TABLE</span><span style="color:#B392F0"> copia_employees</span><span style="color:#F97583"> AS</span></span>
+<span class="line"><span style="color:#F97583">SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> FROM</span><span style="color:#79B8FF"> samesa</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">EMPLOYEES</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p>Se trabaja sobre una copia para no modificar la tabla original de HR.</p>
+<hr>
+<h2 id="trigger-de-auditoría">Trigger de Auditoría</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> TRIGGER</span><span style="color:#E1E4E8"> "</span><span style="color:#B392F0">TR_SALARIO_80</span><span style="color:#E1E4E8">"</span></span>
+<span class="line"><span style="color:#F97583">  AFTER</span><span style="color:#F97583"> UPDATE</span></span>
+<span class="line"><span style="color:#F97583">  ON</span><span style="color:#E1E4E8"> copia_employees</span></span>
+<span class="line"><span style="color:#F97583">  FOR</span><span style="color:#E1E4E8"> EACH </span><span style="color:#F97583">ROW</span></span>
+<span class="line"><span style="color:#F97583">  WHEN</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">OLD</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">department_id</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 80</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">DECLARE</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">BEGIN</span></span>
+<span class="line"><span style="color:#F97583">  INSERT INTO</span><span style="color:#E1E4E8"> auditoria_empleados (</span></span>
+<span class="line"><span style="color:#E1E4E8">    employee_id,</span></span>
+<span class="line"><span style="color:#E1E4E8">    salario_anterior,</span></span>
+<span class="line"><span style="color:#E1E4E8">    salario_nuevo,</span></span>
+<span class="line"><span style="color:#E1E4E8">    fecha_cambio,</span></span>
+<span class="line"><span style="color:#E1E4E8">    usuario_modifico</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) </span><span style="color:#F97583">VALUES</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    :</span><span style="color:#79B8FF">OLD</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">employee_id</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    :</span><span style="color:#79B8FF">OLD</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">salary</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    :</span><span style="color:#79B8FF">NEW</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">salary</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    SYSDATE</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    USER</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">EXCEPTION</span></span>
+<span class="line"><span style="color:#F97583">  WHEN</span><span style="color:#E1E4E8"> OTHERS </span><span style="color:#F97583">THEN</span></span>
+<span class="line"><span style="color:#79B8FF">    DBMS_OUTPUT</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">PUT_LINE</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Error en el trigger TR_SALARIO_80: '</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> SQLERRM);</span></span>
+<span class="line"><span style="color:#F97583">END</span><span style="color:#9ECBFF"> "TR_SALARIO_80"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">/</span></span></code></pre>
+<hr>
+<h2 id="explicación">Explicación</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Elemento</th><th>Descripción</th></tr></thead><tbody><tr><td><code>AFTER UPDATE</code></td><td>Se ejecuta después de que el UPDATE ocurre, no antes.</td></tr><tr><td><code>FOR EACH ROW</code></td><td>Se dispara por cada fila afectada, no una sola vez por sentencia.</td></tr><tr><td><code>WHEN (OLD.department_id = 80)</code></td><td>Filtra: solo audita empleados del departamento 80.</td></tr><tr><td><code>:OLD.salary</code></td><td>Valor del salario antes del cambio.</td></tr><tr><td><code>:NEW.salary</code></td><td>Valor del salario después del cambio.</td></tr><tr><td><code>USER</code></td><td>Función de Oracle que retorna el usuario de sesión que ejecutó el cambio.</td></tr><tr><td><code>SYSDATE</code></td><td>Fecha y hora exacta del momento del cambio.</td></tr><tr><td><code>EXCEPTION WHEN OTHERS</code></td><td>Captura cualquier error inesperado sin detener la ejecución.</td></tr></tbody></table>
+<hr>
+<h2 id="aprendizaje">Aprendizaje</h2>
+<p>Los triggers son útiles para auditoría porque actúan de forma transparente: el usuario que hace el <code>UPDATE</code> no necesita saber que existe el trigger. La cláusula <code>WHEN</code> permite filtrar sin meter lógica dentro del cuerpo del trigger, lo que mejora el rendimiento.</p></div><div style="text-align:center; margin-top:3rem;" data-astro-cid-fzx4jmue><a href="/plsql/" class="back-button" data-astro-cid-fzx4jmue>← Back to PL/SQL</a></div></article> </main> <footer class="site-foot"> <div>&copy; 2026 <a href="/">Clay</a></div> <div>
+Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> |
+        Licensed under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a> </div> </footer> <script type="module">function a(e){document.documentElement.setAttribute("lang",e),localStorage.setItem("lang",e),document.querySelectorAll("[data-en]").forEach(o=>{const c=o.getAttribute(`data-${e}`);c&&(o.textContent=c)});const n=document.getElementById("lang-text");n&&(n.textContent=e==="en"?"ES":"EN")}function r(){const e=localStorage.getItem("lang")||"en";a(e);const t=document.getElementById("lang-toggle");t&&(t.onclick=()=>{const o=(document.documentElement.getAttribute("lang")||"en")==="en"?"es":"en";a(o)})}function u(){const e=document.querySelector(".nav-burger"),t=document.querySelector(".site-wrapper");e&&t&&(e.onclick=n=>{n.preventDefault(),t.classList.toggle("site-head-open")})}function l(){u(),r()}document.addEventListener("DOMContentLoaded",l);document.addEventListener("astro:page-load",l);</script> </body> </html>

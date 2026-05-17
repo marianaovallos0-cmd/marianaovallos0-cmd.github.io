@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Portfolio"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.6"><title>Employee Query / Consulta Empleado</title><script>
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.setAttribute("lang", savedLang);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${savedLang}`);
+            if (text) el.textContent = text;
+        });
+    });
+</script><link rel="stylesheet" href="/_astro/_slug_.UfwbQBmG.css">
+<style>.back-button[data-astro-cid-fzx4jmue]{display:inline-block;padding:.8rem 1.6rem;border-radius:8px;background:var(--color-primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s ease}.back-button[data-astro-cid-fzx4jmue]:hover{opacity:.85}
+</style></head> <body class="site-wrapper"> <header class="site-head"> <div class="site-head-container"> <a class="nav-burger" href="#"> <div class="hamburger hamburger--collapse"> <div class="hamburger-box"> <div class="hamburger-inner"></div> </div> </div> </a> <nav class="site-head-left"> <ul class="nav"> <li> <a href="/" data-en="Home" data-es="Inicio">Home</a> </li> <li> <a href="/bio/" data-en="About" data-es="Sobre mí">About</a> </li> <li> <a href="/work/" data-en="Work" data-es="Proyectos">Work</a> </li> <li> <a href="/contact/" data-en="Contact" data-es="Contacto">Contact</a> </li> <li> <a href="/evidencias/" data-en="Evidence" data-es="Evidencias">Evidence</a> </li> </ul> </nav> <div class="site-head-center"> <a class="site-head-logo" href="/"> Employee Query / Consulta Empleado </a> </div> <div class="site-head-right"> <div class="social-links"> <button id="lang-toggle" class="lang-toggle"> <span id="lang-text">EN</span> </button> </div> </div> </div> </header> <main id="site-main" class="site-main"> <article class="post-content" data-astro-cid-fzx4jmue><h1 class="page-head-title" data-astro-cid-fzx4jmue>Employee Query / Consulta Empleado</h1><p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;" data-astro-cid-fzx4jmue>
+Autor: Christian Duarte</p><p class="evidence-desc" style="text-align:center; margin-bottom:2rem;" data-astro-cid-fzx4jmue>ROWTYPE variable with salary and commission calculation using NVL.</p><div class="post-content-body" data-astro-cid-fzx4jmue><h2 id="contexto">Contexto</h2>
+<p>Se usó una variable de tipo <code>%ROWTYPE</code> para recuperar toda la fila de un empleado y calcular su salario real descontando la comisión. Se trabajó con dos versiones: una que genera un error de tipo de datos y la versión corregida con <code>TO_CHAR</code>.</p>
+<hr>
+<h2 id="versión-corregida">Versión Corregida</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">  Autor: Christian Duarte</span></span>
+<span class="line"><span style="color:#6A737D">  Fecha: 01/12/2026</span></span>
+<span class="line"><span style="color:#6A737D">  Descripción: Mi primer script</span></span>
+<span class="line"><span style="color:#6A737D">*/</span></span>
+<span class="line"><span style="color:#F97583">DECLARE</span></span>
+<span class="line"><span style="color:#E1E4E8">  v_empleado </span><span style="color:#79B8FF">HR</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">EMPLOYEES</span><span style="color:#E1E4E8">%ROWTYPE;</span></span>
+<span class="line"><span style="color:#F97583">BEGIN</span></span>
+<span class="line"><span style="color:#F97583">  SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> INTO</span><span style="color:#E1E4E8"> v_empleado</span></span>
+<span class="line"><span style="color:#F97583">  FROM</span><span style="color:#79B8FF"> HR</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">EMPLOYEES</span></span>
+<span class="line"><span style="color:#F97583">  WHERE</span><span style="color:#E1E4E8"> EMPLOYEE_ID </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 109</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">  DBMS_OUTPUT</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">PUT_LINE</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    'El salario es: '</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">SALARY</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#9ECBFF">    ' y el nombre es: '</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">FIRST_NAME</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#9ECBFF">    ', pero por culpa del Gobierno su salario es '</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#E1E4E8">    TO_CHAR(</span><span style="color:#79B8FF">v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">salary</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">salary</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8"> NVL(</span><span style="color:#79B8FF">v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">commission_pct</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)))</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#F97583">END</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<hr>
+<h2 id="versión-con-error-para-comparación">Versión con Error (para comparación)</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">DECLARE</span></span>
+<span class="line"><span style="color:#E1E4E8">  v_empleado </span><span style="color:#79B8FF">HR</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">EMPLOYEES</span><span style="color:#E1E4E8">%ROWTYPE;</span></span>
+<span class="line"><span style="color:#F97583">BEGIN</span></span>
+<span class="line"><span style="color:#F97583">  SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> INTO</span><span style="color:#E1E4E8"> v_empleado</span></span>
+<span class="line"><span style="color:#F97583">  FROM</span><span style="color:#79B8FF"> HR</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">EMPLOYEES</span></span>
+<span class="line"><span style="color:#F97583">  WHERE</span><span style="color:#E1E4E8"> EMPLOYEE_ID </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 109</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">  DBMS_OUTPUT</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">PUT_LINE</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    'El salario es: '</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">SALARY</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#9ECBFF">    ' y el nombre es: '</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">FIRST_NAME</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#9ECBFF">    ', pero por culpa del Gobierno su salario es '</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#79B8FF">    v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">salary</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">salary</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8"> NVL(</span><span style="color:#79B8FF">v_empleado</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">commission_pct</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#F97583">END</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p><strong>Error:</strong> Oracle no puede concatenar (<code>||</code>) un <code>NUMBER</code> directamente con un <code>VARCHAR2</code>. La expresión aritmética al final no está envuelta en <code>TO_CHAR</code>, lo que produce un error de tipos en tiempo de ejecución.</p>
+<hr>
+<h2 id="explicación-de-elementos-clave">Explicación de elementos clave</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Elemento</th><th>Descripción</th></tr></thead><tbody><tr><td><code>%ROWTYPE</code></td><td>La variable hereda la estructura completa de la tabla, incluyendo todos sus campos.</td></tr><tr><td><code>NVL(commission_pct, 0)</code></td><td>Si no tiene comisión, lo trata como <code>0</code> para que la multiplicación no devuelva <code>NULL</code>.</td></tr><tr><td><code>TO_CHAR(...)</code></td><td>Convierte el resultado numérico a texto para poder concatenarlo en el <code>PUT_LINE</code>.</td></tr><tr><td><code>SELECT * INTO</code></td><td>Recupera exactamente una fila. Si devuelve cero o más de una, Oracle lanza <code>NO_DATA_FOUND</code></td></tr><tr><td></td><td>o <code>TOO_MANY_ROWS</code>.</td></tr></tbody></table>
+<hr>
+<h2 id="aprendizaje">Aprendizaje</h2>
+<p><code>%ROWTYPE</code> es una de las herramientas más útiles en PL/SQL para trabajar con filas completas sin declarar cada campo individualmente. El uso de <code>NVL</code> es fundamental cuando hay campos opcionales que podrían ser <code>NULL</code> y participan en cálculos: cualquier operación aritmética con <code>NULL</code> produce <code>NULL</code>.</p></div><div style="text-align:center; margin-top:3rem;" data-astro-cid-fzx4jmue><a href="/plsql/" class="back-button" data-astro-cid-fzx4jmue>← Back to PL/SQL</a></div></article> </main> <footer class="site-foot"> <div>&copy; 2026 <a href="/">Clay</a></div> <div>
+Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> |
+        Licensed under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a> </div> </footer> <script type="module">function a(e){document.documentElement.setAttribute("lang",e),localStorage.setItem("lang",e),document.querySelectorAll("[data-en]").forEach(o=>{const c=o.getAttribute(`data-${e}`);c&&(o.textContent=c)});const n=document.getElementById("lang-text");n&&(n.textContent=e==="en"?"ES":"EN")}function r(){const e=localStorage.getItem("lang")||"en";a(e);const t=document.getElementById("lang-toggle");t&&(t.onclick=()=>{const o=(document.documentElement.getAttribute("lang")||"en")==="en"?"es":"en";a(o)})}function u(){const e=document.querySelector(".nav-burger"),t=document.querySelector(".site-wrapper");e&&t&&(e.onclick=n=>{n.preventDefault(),t.classList.toggle("site-head-open")})}function l(){u(),r()}document.addEventListener("DOMContentLoaded",l);document.addEventListener("astro:page-load",l);</script> </body> </html>

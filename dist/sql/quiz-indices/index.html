@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Portfolio"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.6"><title>Quiz — Indexes / Quiz — Índices</title><script>
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.documentElement.setAttribute("lang", savedLang);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-en]");
+        elements.forEach((el) => {
+            const text = el.getAttribute(`data-${savedLang}`);
+            if (text) el.textContent = text;
+        });
+    });
+</script><link rel="stylesheet" href="/_astro/_slug_.UfwbQBmG.css">
+<style>.back-button[data-astro-cid-fzx4jmue]{display:inline-block;padding:.8rem 1.6rem;border-radius:8px;background:var(--color-primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s ease}.back-button[data-astro-cid-fzx4jmue]:hover{opacity:.85}
+</style></head> <body class="site-wrapper"> <header class="site-head"> <div class="site-head-container"> <a class="nav-burger" href="#"> <div class="hamburger hamburger--collapse"> <div class="hamburger-box"> <div class="hamburger-inner"></div> </div> </div> </a> <nav class="site-head-left"> <ul class="nav"> <li> <a href="/" data-en="Home" data-es="Inicio">Home</a> </li> <li> <a href="/bio/" data-en="About" data-es="Sobre mí">About</a> </li> <li> <a href="/work/" data-en="Work" data-es="Proyectos">Work</a> </li> <li> <a href="/contact/" data-en="Contact" data-es="Contacto">Contact</a> </li> <li> <a href="/evidencias/" data-en="Evidence" data-es="Evidencias">Evidence</a> </li> </ul> </nav> <div class="site-head-center"> <a class="site-head-logo" href="/"> Quiz — Indexes / Quiz — Índices </a> </div> <div class="site-head-right"> <div class="social-links"> <button id="lang-toggle" class="lang-toggle"> <span id="lang-text">EN</span> </button> </div> </div> </div> </header> <main id="site-main" class="site-main"> <article class="post-content" data-astro-cid-fzx4jmue><h1 class="page-head-title" data-astro-cid-fzx4jmue>Quiz — Indexes / Quiz — Índices</h1><p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;" data-astro-cid-fzx4jmue>
+Autor: _____</p><p class="evidence-desc" style="text-align:center; margin-bottom:2rem;" data-astro-cid-fzx4jmue>Composite index analysis over PAY_TIME_ENTRIES.</p><div class="post-content-body" data-astro-cid-fzx4jmue><h2 id="contexto">Contexto</h2>
+<p>Se creó un índice compuesto sobre la tabla <code>PAY_TIME_ENTRIES</code> con dos columnas: primero <code>EMPLOYEE_ID</code> y luego <code>WORK_DATE</code>. La pregunta del quiz era determinar qué consultas se benefician realmente de ese índice y por qué.</p>
+<hr>
+<h2 id="creación-del-índice">Creación del Índice</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">CREATE</span><span style="color:#F97583"> INDEX</span><span style="color:#B392F0"> IX_TIME_EMP_DATE</span></span>
+<span class="line"><span style="color:#F97583">ON</span><span style="color:#E1E4E8"> PAY_TIME_ENTRIES (EMPLOYEE_ID, WORK_DATE);</span></span></code></pre>
+<p>Un índice compuesto funciona de izquierda a derecha: la <strong>columna líder</strong> (<code>EMPLOYEE_ID</code>) debe estar presente en la condición para que el índice sea aprovechado eficientemente.</p>
+<hr>
+<h2 id="consultas-evaluadas">Consultas Evaluadas</h2>
+<p><strong>Consulta A</strong> — Usa ambas columnas: filtro de igualdad sobre la líder + rango sobre la segunda.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> FROM</span><span style="color:#E1E4E8"> PAY_TIME_ENTRIES</span></span>
+<span class="line"><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> EMPLOYEE_ID </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 100</span></span>
+<span class="line"><span style="color:#F97583">  AND</span><span style="color:#E1E4E8"> WORK_DATE </span><span style="color:#F97583">BETWEEN</span><span style="color:#F97583"> DATE</span><span style="color:#9ECBFF"> '2026-03-01'</span><span style="color:#F97583"> AND</span><span style="color:#F97583"> DATE</span><span style="color:#9ECBFF"> '2026-03-31'</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p><strong>Consulta B</strong> — Solo usa <code>WORK_DATE</code> (no es la columna líder).</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> FROM</span><span style="color:#E1E4E8"> PAY_TIME_ENTRIES</span></span>
+<span class="line"><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> WORK_DATE </span><span style="color:#F97583">=</span><span style="color:#F97583"> DATE</span><span style="color:#9ECBFF"> '2026-03-15'</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p><strong>Consulta C</strong> — Solo usa <code>EMPLOYEE_ID</code> (la columna líder).</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> FROM</span><span style="color:#E1E4E8"> PAY_TIME_ENTRIES</span></span>
+<span class="line"><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> EMPLOYEE_ID </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p><strong>Consulta D</strong> — Usa ambas columnas, pero con una desigualdad (<code>></code>) sobre la líder.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">SELECT</span><span style="color:#F97583"> *</span><span style="color:#F97583"> FROM</span><span style="color:#E1E4E8"> PAY_TIME_ENTRIES</span></span>
+<span class="line"><span style="color:#F97583">WHERE</span><span style="color:#E1E4E8"> WORK_DATE </span><span style="color:#F97583">BETWEEN</span><span style="color:#F97583"> DATE</span><span style="color:#9ECBFF"> '2026-03-01'</span><span style="color:#F97583"> AND</span><span style="color:#F97583"> DATE</span><span style="color:#9ECBFF"> '2026-03-31'</span></span>
+<span class="line"><span style="color:#F97583">  AND</span><span style="color:#E1E4E8"> EMPLOYEE_ID </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<hr>
+<h2 id="respuesta-correcta-b">Respuesta Correcta: <strong>B</strong></h2>
+<blockquote>
+<p><em>El índice beneficia claramente a A y C, puede ayudar en D en ciertos escenarios, pero no es la mejor opción para B porque <code>WORK_DATE</code> no es la columna líder.</em></p>
+</blockquote>
+<hr>
+<h2 id="análisis">Análisis</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Consulta</th><th>¿Usa índice?</th><th>Razón</th></tr></thead><tbody><tr><td>A</td><td>Sí, eficientemente</td><td>Igualdad en líder + rango en segunda: uso óptimo del índice.</td></tr><tr><td>B</td><td>No eficientemente</td><td><code>WORK_DATE</code> no es la columna líder; Oracle haría full scan.</td></tr><tr><td>C</td><td>Sí</td><td>Solo la columna líder es suficiente para activar el índice.</td></tr><tr><td>D</td><td>Parcialmente</td><td>La desigualdad (<code>></code>) en la líder limita el uso; depende del optimizador.</td></tr></tbody></table>
+<hr>
+<h2 id="aprendizaje">Aprendizaje</h2>
+<p>Al diseñar índices compuestos, la columna que se filtra con <strong>igualdad más frecuente</strong> debe ir primero. Los filtros de rango o desigualdad en la columna líder reducen la efectividad del índice. Si la consulta más frecuente es sobre <code>WORK_DATE</code>, sería mejor un índice separado para esa columna.</p></div><div style="text-align:center; margin-top:3rem;" data-astro-cid-fzx4jmue><a href="/sql/" class="back-button" data-astro-cid-fzx4jmue>← Back to SQL</a></div></article> </main> <footer class="site-foot"> <div>&copy; 2026 <a href="/">Clay</a></div> <div>
+Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> |
+        Licensed under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a> </div> </footer> <script type="module">function a(e){document.documentElement.setAttribute("lang",e),localStorage.setItem("lang",e),document.querySelectorAll("[data-en]").forEach(o=>{const c=o.getAttribute(`data-${e}`);c&&(o.textContent=c)});const n=document.getElementById("lang-text");n&&(n.textContent=e==="en"?"ES":"EN")}function r(){const e=localStorage.getItem("lang")||"en";a(e);const t=document.getElementById("lang-toggle");t&&(t.onclick=()=>{const o=(document.documentElement.getAttribute("lang")||"en")==="en"?"es":"en";a(o)})}function u(){const e=document.querySelector(".nav-burger"),t=document.querySelector(".site-wrapper");e&&t&&(e.onclick=n=>{n.preventDefault(),t.classList.toggle("site-head-open")})}function l(){u(),r()}document.addEventListener("DOMContentLoaded",l);document.addEventListener("astro:page-load",l);</script> </body> </html>
