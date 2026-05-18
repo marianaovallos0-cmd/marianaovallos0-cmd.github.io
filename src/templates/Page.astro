@@ -141,115 +141,41 @@ const [esTitle, enTitle] = rawTitle.split(" / ");
     )}
 
     {entry.slug === "proyecto" && (
-    <section class="project-showcase">
+    <section class="evidence-section">
+      <div class="evidence-grid">
 
-      {/* HERO */}
-      <div class="project-hero">
-        <div class="project-hero-icon">🐾</div>
-        <h1 class="project-hero-title">Delta</h1>
-        <p class="project-hero-sub"
-          data-en="A platform connecting dog owners with trusted walkers in real time."
-          data-es="Una plataforma que conecta dueños de perros con paseadores de confianza en tiempo real.">
-          A platform connecting dog owners with trusted walkers in real time.
-        </p>
-        <div class="project-badges">
-          <span class="badge">PostgreSQL</span>
-          <span class="badge">Spring Boot</span>
-          <span class="badge">MongoDB</span>
-          <span class="badge">React</span>
-          <span class="badge">Java</span>
-        </div>
-      </div>
-
-      {/* TIMELINE */}
-      <div class="project-timeline">
-        <div class="timeline-step done">
-          <div class="timeline-dot">✓</div>
-          <div class="timeline-label" data-en="Phase 1" data-es="Fase 1">Phase 1</div>
-          <div class="timeline-sublabel" data-en="Design & Planning" data-es="Diseño y Planificación">Design & Planning</div>
-        </div>
-        <div class="timeline-line"></div>
-        <div class="timeline-step done">
-          <div class="timeline-dot">✓</div>
-          <div class="timeline-label" data-en="Phase 2" data-es="Fase 2">Phase 2</div>
-          <div class="timeline-sublabel" data-en="Relational DB" data-es="BD Relacional">Relational DB</div>
-        </div>
-        <div class="timeline-line"></div>
-        <div class="timeline-step progress">
-          <div class="timeline-dot">⟳</div>
-          <div class="timeline-label" data-en="Phase 3" data-es="Fase 3">Phase 3</div>
-          <div class="timeline-sublabel" data-en="Integration" data-es="Integración">Integration</div>
-        </div>
-      </div>
-
-      {/* MODULE CARDS */}
-      <div class="project-modules">
-
-        <a href="/proyecto/base-de-datos/" class="module-card">
-          <div class="module-icon">🗄️</div>
-          <div class="module-body">
-            <h3 class="module-title"
-                data-en="Relational Database"
-                data-es="Base de Datos Relacional">Relational Database</h3>
-            <p class="module-desc"
-              data-en="12 entities, custom domains, functions, triggers, stored procedures and materialized views in PostgreSQL."
-              data-es="12 entidades, dominios personalizados, funciones, triggers, procedimientos y vistas materializadas en PostgreSQL.">
-              12 entities, custom domains, functions, triggers, stored procedures and materialized views in PostgreSQL.
-            </p>
-            <span class="module-tag">PostgreSQL</span>
-          </div>
-          <div class="module-arrow">→</div>
+        <a href="/proyecto/overview/" class="evidence-card">
+          <div class="evidence-icon">OVW</div>
+          <h3 class="evidence-title" data-en="Overview" data-es="Visión General">Overview</h3>
+          <p class="evidence-desc"
+            data-en="Problem, solution, tech stack and repositories."
+            data-es="Problema, solución, stack tecnológico y repositorios.">
+            Problem, solution, tech stack and repositories.
+          </p>
         </a>
 
-        <a href="/proyecto/overview/" class="module-card">
-          <div class="module-icon">🔭</div>
-          <div class="module-body">
-            <h3 class="module-title"
-                data-en="Overview"
-                data-es="Visión General">Overview</h3>
-            <p class="module-desc"
-              data-en="Problem, solution, full tech stack and links to the team's repositories."
-              data-es="Problema, solución, stack completo y links a los repositorios del equipo.">
-              Problem, solution, full tech stack and links to the team's repositories.
-            </p>
-            <span class="module-tag">Spring Boot · React</span>
-          </div>
-          <div class="module-arrow">→</div>
+        <a href="/proyecto/base-de-datos/" class="evidence-card">
+          <div class="evidence-icon">DB</div>
+          <h3 class="evidence-title" data-en="Relational Database" data-es="Base de Datos Relacional">Relational Database</h3>
+          <p class="evidence-desc"
+            data-en="PostgreSQL schema: 12 entities, functions, triggers, procedures and views."
+            data-es="Esquema PostgreSQL: 12 entidades, funciones, triggers, procedimientos y vistas.">
+            PostgreSQL schema: 12 entities, functions, triggers, procedures and views.
+          </p>
         </a>
 
-        <a href="/proyecto/gestion/" class="module-card">
-          <div class="module-icon">📋</div>
-          <div class="module-body">
-            <h3 class="module-title"
-                data-en="Project Management"
-                data-es="Gestión del Proyecto">Project Management</h3>
-            <p class="module-desc"
-              data-en="Scrum sprints, Gantt chart, RACI matrix and risk management for a 3-person academic team."
-              data-es="Sprints Scrum, Gantt, matriz RACI y gestión de riesgos para equipo académico de 3 personas.">
-              Scrum sprints, Gantt chart, RACI matrix and risk management for a 3-person academic team.
-            </p>
-            <span class="module-tag">Scrum · Gantt</span>
-          </div>
-          <div class="module-arrow">→</div>
+        <a href="/proyecto/gestion/" class="evidence-card">
+          <div class="evidence-icon">MGT</div>
+          <h3 class="evidence-title" data-en="Project Management" data-es="Gestión del Proyecto">Project Management</h3>
+          <p class="evidence-desc"
+            data-en="Scrum, Gantt, RACI matrix and risk management."
+            data-es="Scrum, Gantt, matriz RACI y gestión de riesgos.">
+            Scrum, Gantt, RACI matrix and risk management.
+          </p>
         </a>
 
       </div>
-
-      {/* REPO BUTTONS */}
-      <div class="project-repos">
-        <p class="repos-label" data-en="Repositories" data-es="Repositorios">Repositories</p>
-        <div class="repos-buttons">
-          <a href="https://github.com/DnzoCoud/paseadores-back" target="_blank" class="repo-btn">
-            ⚙️ Backend
-          </a>
-          <a href="https://github.com/marianaovallos0-cmd/plataforma_paseadores_front" target="_blank" class="repo-btn">
-            🖥️ Frontend
-          </a>
-        </div>
-      </div>
-
     </section>
   )}
-
   </article>
 </Layout>
