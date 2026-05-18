@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout.astro";
 import Showcase from "../templates/Showcase.astro";
 
 export async function getStaticPaths() {
+
   const pages = await getCollection("pages");
   const sql = await getCollection("sql");
   const plsql = await getCollection("plsql");
@@ -54,13 +55,19 @@ const { entry, type } = Astro.props;
 const { Content } = await entry.render();
 ---
 
+{/* PAGE NORMAL */}
+
 {type === "page" && entry.data.templateKey !== "showcase" && (
   <Page entry={entry} />
 )}
 
-{entry.data.templateKey === "showcase" && (
+{/* SHOWCASE */}
+
+{type === "page" && entry.data.templateKey === "showcase" && (
   <Showcase entry={entry} />
 )}
+
+{/* SQL */}
 
 {type === "sql" && (
   <Layout title={entry.data.title}>
@@ -71,18 +78,12 @@ const { Content } = await entry.render();
       </h1>
 
       {entry.data.author && (
-        <p
-          class="evidence-desc"
-          style="text-align:center; margin-bottom:0.5rem;"
-        >
+        <p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;">
           Autor: {entry.data.author}
         </p>
       )}
 
-      <p
-        class="evidence-desc"
-        style="text-align:center; margin-bottom:2rem;"
-      >
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
         {entry.data.description}
       </p>
 
@@ -100,6 +101,8 @@ const { Content } = await entry.render();
   </Layout>
 )}
 
+{/* PLSQL */}
+
 {type === "plsql" && (
   <Layout title={entry.data.title}>
     <article class="post-content">
@@ -109,18 +112,12 @@ const { Content } = await entry.render();
       </h1>
 
       {entry.data.author && (
-        <p
-          class="evidence-desc"
-          style="text-align:center; margin-bottom:0.5rem;"
-        >
+        <p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;">
           Autor: {entry.data.author}
         </p>
       )}
 
-      <p
-        class="evidence-desc"
-        style="text-align:center; margin-bottom:2rem;"
-      >
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
         {entry.data.description}
       </p>
 
@@ -138,6 +135,8 @@ const { Content } = await entry.render();
   </Layout>
 )}
 
+{/* NOSQL */}
+
 {type === "nosql" && (
   <Layout title={entry.data.title}>
     <article class="post-content">
@@ -147,18 +146,12 @@ const { Content } = await entry.render();
       </h1>
 
       {entry.data.author && (
-        <p
-          class="evidence-desc"
-          style="text-align:center; margin-bottom:0.5rem;"
-        >
+        <p class="evidence-desc" style="text-align:center; margin-bottom:0.5rem;">
           Autor: {entry.data.author}
         </p>
       )}
 
-      <p
-        class="evidence-desc"
-        style="text-align:center; margin-bottom:2rem;"
-      >
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
         {entry.data.description}
       </p>
 
@@ -176,6 +169,8 @@ const { Content } = await entry.render();
   </Layout>
 )}
 
+{/* PROYECTO EVIDENCIAS */}
+
 {type === "proyecto" && (
   <Layout title={entry.data.title}>
     <article class="post-content">
@@ -184,10 +179,7 @@ const { Content } = await entry.render();
         {entry.data.title}
       </h1>
 
-      <p
-        class="evidence-desc"
-        style="text-align:center; margin-bottom:2rem;"
-      >
+      <p class="evidence-desc" style="text-align:center; margin-bottom:2rem;">
         {entry.data.description}
       </p>
 
