@@ -11,6 +11,7 @@ export async function getStaticPaths() {
   const plsql = await getCollection("plsql");
   const nosql = await getCollection("nosql");
   const proyecto = await getCollection("proyecto");
+  const showcase = await getCollection("showcase");
 
   const pagePaths = pages.map((page) => ({
     params: { slug: page.slug },
@@ -37,12 +38,18 @@ export async function getStaticPaths() {
     props: { entry: script, type: "proyecto" },
   }));
 
+  const showcasePaths = showcase.map((script) => ({
+  params: { slug: `showcase/${script.slug}` },
+  props: { entry: script, type: "showcase" },
+}));
+
   return [
     ...pagePaths,
     ...sqlPaths,
     ...plsqlPaths,
     ...nosqlPaths,
     ...proyectoPaths,
+    ...showcasePaths
   ];
 }
 
@@ -190,6 +197,38 @@ const { Content } = await entry.render();
       <div style="text-align:center; margin-top:3rem;">
         <a href="/proyecto/" class="back-button">
           ← Back to Project
+        </a>
+      </div>
+
+    </article>
+  </Layout>
+)}
+
+{/* PROYECTO MENU*/}
+
+
+{type === "showcase" && (
+  <Layout title={entry.data.title}>
+    <article class="post-content">
+
+      <h1 class="page-head-title">
+        {entry.data.title}
+      </h1>
+
+      <p
+        class="evidence-desc"
+        style="text-align:center; margin-bottom:2rem;"
+      >
+        {entry.data.description}
+      </p>
+
+      <div class="post-content-body">
+        <Content />
+      </div>
+
+      <div style="text-align:center; margin-top:3rem;">
+        <a href="/work/" class="back-button">
+          ← Back to Projects
         </a>
       </div>
 
