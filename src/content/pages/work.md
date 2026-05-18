@@ -1,4 +1,4 @@
 ---
 templateKey: page
-title: Proyectos / WorProje
+title: NOSS / Work
 ---
