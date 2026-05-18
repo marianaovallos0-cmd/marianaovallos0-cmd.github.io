@@ -1,0 +1,329 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const { entry } = Astro.props;
+---
+
+<Layout title={entry.data.title}>
+
+  <article class="showcase-container">
+
+    <section class="project-hero">
+
+      <div class="project-banner">
+
+        <div class="project-icon">🐾</div>
+
+        <h1
+          data-en="Delta"
+          data-es="Delta">
+          Delta
+        </h1>
+
+        <p
+          class="project-subtitle"
+          data-en="Dog walker management platform."
+          data-es="Plataforma de paseadores de perros.">
+          Dog walker management platform.
+        </p>
+
+        <div class="project-badges">
+
+          <span class="tech-badge">PostgreSQL</span>
+          <span class="tech-badge">Spring Boot</span>
+          <span class="tech-badge">MongoDB</span>
+
+        </div>
+
+        <p
+          class="project-description"
+          data-en="Integrated system focused on database architecture, REST API development, and NoSQL solutions."
+          data-es="Sistema integrado enfocado en arquitectura de bases de datos, APIs REST y soluciones NoSQL.">
+          Integrated system focused on database architecture, REST API development, and NoSQL solutions.
+        </p>
+
+        <div class="project-buttons">
+
+          <a
+            class="repo-button"
+            href="https://github.com/marianaovallos0-cmd"
+            target="_blank">
+
+            GitHub
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="timeline-section">
+
+      <div class="timeline-container">
+
+        <div class="timeline-phase completed">
+          <span>Phase 1</span>
+          <span>✅</span>
+        </div>
+
+        <div class="timeline-line"></div>
+
+        <div class="timeline-phase completed">
+          <span>Phase 2</span>
+          <span>✅</span>
+        </div>
+
+        <div class="timeline-line"></div>
+
+        <div class="timeline-phase progress">
+          <span>Phase 3</span>
+          <span>🔄</span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="modules-section">
+
+      <div class="modules-grid">
+
+        <a href="/proyecto/db/" class="module-card">
+
+          <div class="module-icon">🗄️</div>
+
+          <div class="module-content">
+
+            <h2
+              data-en="Relational Database"
+              data-es="Base de Datos Relacional">
+              Relational Database
+            </h2>
+
+            <p
+              data-en="PostgreSQL schema with entities, triggers, procedures, views, and optimization."
+              data-es="Esquema PostgreSQL con entidades, triggers, procedimientos, vistas y optimización.">
+              PostgreSQL schema with entities, triggers, procedures, views, and optimization.
+            </p>
+
+          </div>
+
+        </a>
+
+        <a href="/proyecto/api/" class="module-card">
+
+          <div class="module-icon">⚙️</div>
+
+          <div class="module-content">
+
+            <h2
+              data-en="REST API"
+              data-es="API REST">
+              REST API
+            </h2>
+
+            <p
+              data-en="Spring Boot backend with authentication, endpoints, and business logic."
+              data-es="Backend Spring Boot con autenticación, endpoints y lógica de negocio.">
+              Spring Boot backend with authentication, endpoints, and business logic.
+            </p>
+
+          </div>
+
+        </a>
+
+        <a href="/proyecto/nosql/" class="module-card">
+
+          <div class="module-icon">🍃</div>
+
+          <div class="module-content">
+
+            <h2
+              data-en="NoSQL"
+              data-es="NoSQL">
+              NoSQL
+            </h2>
+
+            <p
+              data-en="MongoDB implementation for scalability, analytics, and flexible storage."
+              data-es="Implementación MongoDB para escalabilidad y almacenamiento flexible.">
+              MongoDB implementation for scalability, analytics, and flexible storage.
+            </p>
+
+          </div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+  </article>
+
+</Layout>
+
+<style>
+
+.showcase-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.project-hero {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.project-banner {
+  border: 1px solid rgba(120, 90, 50, 0.2);
+  border-radius: 22px;
+  padding: 3rem;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
+}
+
+.project-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.project-banner h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.project-description {
+  margin-top: 1.5rem;
+  max-width: 700px;
+  line-height: 1.8;
+}
+
+.project-badges {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.tech-badge {
+  border: 1px solid #c97b3b;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  transition: 0.3s ease;
+}
+
+.tech-badge:hover {
+  background: #c97b3b;
+  color: white;
+}
+
+.project-buttons {
+  margin-top: 2rem;
+}
+
+.repo-button {
+  display: inline-block;
+  border: 1px solid #c97b3b;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.repo-button:hover {
+  background: #c97b3b;
+  color: white;
+}
+
+.timeline-section {
+  margin-bottom: 4rem;
+}
+
+.timeline-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.timeline-phase {
+  border: 1px solid rgba(120, 90, 50, 0.2);
+  border-radius: 999px;
+  padding: 0.8rem 1.4rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.timeline-line {
+  width: 40px;
+  height: 1px;
+  background: rgba(120, 90, 50, 0.3);
+}
+
+.modules-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.module-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid rgba(120, 90, 50, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  text-decoration: none;
+  transition: 0.35s ease;
+}
+
+.module-card:hover {
+  transform: translateY(-5px);
+  border-color: #c97b3b;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.module-icon {
+  font-size: 3rem;
+  min-width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.module-content h2 {
+  margin-bottom: 0.8rem;
+}
+
+.module-content p {
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+
+  .project-banner {
+    padding: 2rem;
+  }
+
+  .project-banner h1 {
+    font-size: 2.3rem;
+  }
+
+  .module-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+}
+
+</style>

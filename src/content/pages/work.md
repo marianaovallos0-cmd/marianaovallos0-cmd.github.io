@@ -1,4 +1,4 @@
 ---
-templateKey: page
-title: NOSS / Work
+templateKey: showcase
+title: Proyectos / Projects
 ---
