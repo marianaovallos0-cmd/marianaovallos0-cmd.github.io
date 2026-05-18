@@ -8,7 +8,10 @@ export async function getStaticPaths() {
   const sql = await getCollection("sql");
   const plsql = await getCollection("plsql");
   const nosql = await getCollection("nosql");
+<<<<<<< HEAD
   const proyecto = await getCollection("proyecto");
+=======
+>>>>>>> 72b13db (Prueba pagina)
 
   const pagePaths = pages.map((page) => ({
     params: { slug: page.slug },
@@ -30,12 +33,16 @@ export async function getStaticPaths() {
     props: { entry: script, type: "nosql" },
   }));
 
+<<<<<<< HEAD
   const proyectoPaths = proyecto.map((script) => ({
   params: { slug: `proyecto/${script.slug}` },
   props: { entry: script, type: "proyecto" },
   }));
 
   return [...pagePaths, ...sqlPaths, ...plsqlPaths, ...nosqlPaths, ...proyectoPaths];
+=======
+  return [...pagePaths, ...sqlPaths, ...plsqlPaths, ...nosqlPaths];
+>>>>>>> 72b13db (Prueba pagina)
 }
 
 interface Props {
